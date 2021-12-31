@@ -1,0 +1,7 @@
+
+#設定ファイル
+input_mp4_fp = C:\Users\user\Videos\movie_edit\n26\MOV_0035.mp4
+
+#ボリューム  -10～10  0は音量変更なし,負値にすると音量を小さくする。positionはms
+volume = -10
+position = 289000

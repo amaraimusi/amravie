@@ -1,0 +1,11 @@
+
+#モード split_video_sound
+# - split_video_sound mp4を音声なしmp4とmp3に分割します
+mode = split_video_sound
+
+#入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
+input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887.MP4
+
+#ボリューム  -10～10  0は音量変更なし,負値にすると音量を小さくする。positionはms   動画結合ツール用
+volume = -10
+position = 289000
