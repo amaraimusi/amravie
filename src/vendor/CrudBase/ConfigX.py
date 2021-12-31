@@ -38,8 +38,9 @@ class ConfigX:
         if not configs.get('input_mp4_fp'): return configs
         input_mp4_fp = configs['input_mp4_fp']
       
+        time_fomat = configs['time_fomat']
         dt = datetime.datetime.now()
-        u = dt.strftime("%H%M%S")
+        u = dt.strftime(time_fomat)
         
         left_path = self.__stringLeftRev(input_mp4_fp, '.')
         print(left_path)

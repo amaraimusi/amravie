@@ -1,11 +1,20 @@
 
-#モード split_video_sound
+#モード 
 # - split_video_sound mp4を音声なしmp4とmp3に分割します
-mode = split_video_sound
+# - mixing_mp4_mp3 mp4とmp3をミキシングするモード
+mode = mixing_mp4_mp3
 
 #入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
 input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887.MP4
 
-#ボリューム  -10～10  0は音量変更なし,負値にすると音量を小さくする。positionはms   動画結合ツール用
+# 入力mp3ファイルパス
+input_mp3_fp = C:\Users\user\git\amravie\src\test_data\test1.mp3
+
+# 出力ファイル名に付加する日時フォーマット
+time_fomat = %H%M
+
+# mp4とmp3をミキシングするモード関連の設定
+#ボリューム  -10～10  入力mp3のボリューム。0は音量変更なし,負値にすると音量を小さくする。
 volume = -10
-position = 289000
+# 合成位置。 0にすると先頭から合成、3000にすると3秒後から合成
+position = 0
