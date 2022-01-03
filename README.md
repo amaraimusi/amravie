@@ -28,3 +28,34 @@ position = 0
 volume(ボリューム)はinput_mp3_fpの音量調整値。  -10～10 くらいの範囲で設定する。負値にすると音量は小さくなり、正値にすると音量は大きくなる。
 合成位置。 0にすると先頭から合成、3000にすると3秒後から合成
 
+
+### join_bgms 複数のbgmを連結して1つのbgmにする
+
+```
+mode = join_bgms
+input_mp3_fp = C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp1=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp2=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp3=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp4=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp5=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp6=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp7=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp8=C:\Users\user\git\amravie\src\test_data\test2.mp3
+```
+
+
+### 複数のbgmを連結してmp4にミキシングする
+
+```
+mode = bgm_mixing
+input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887.MP4
+bgm_fp1=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp2=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp3=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp4=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp5=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp6=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp7=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp8=C:\Users\user\git\amravie\src\test_data\test2.mp3
+```

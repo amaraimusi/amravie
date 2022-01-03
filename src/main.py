@@ -10,6 +10,8 @@ import tkinter as tk
 from vendor.CrudBase.ConfigX import ConfigX
 from model.SplitVideoSound import SplitVideoSound
 from model.MixingMp4Mp3 import MixingMp4Mp3
+from model.JoinBgms import JoinBgms
+from model.BgmMixing import BgmMixing
 
 print('amaravie')
 
@@ -28,5 +30,15 @@ if(mode == 'mixing_mp4_mp3'):
     print ('mp4にmp3をミキシングします')
     mixingMp4Mp3 = MixingMp4Mp3(configs)
     mixingMp4Mp3.run()
+
+if(mode == 'join_bgms'):
+    print ('複数のbgmを連結して1つのbgmにする')
+    joinBgms = JoinBgms(configs)
+    joinBgms.run()
+
+if(mode == 'bgm_mixing'):
+    print ('複数のbgmを連結してmp4にミキシングします')
+    bgmMixing = BgmMixing(configs)
+    bgmMixing.run()
 
 print('Success')

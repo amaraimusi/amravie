@@ -2,10 +2,12 @@
 #モード 
 # - split_video_sound mp4を音声なしmp4とmp3に分割します
 # - mixing_mp4_mp3 mp4とmp3をミキシングするモード
-mode = mixing_mp4_mp3
+# - join_bgms 複数のbgmを連結して1つのbgmにする
+# - bgm_mixing 複数のbgmを連結してmp4にミキシングする
+mode = join_bgms
 
 #入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
-input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887.MP4
+input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887_v_only.mp4
 
 # 入力mp3ファイルパス
 input_mp3_fp = C:\Users\user\git\amravie\src\test_data\test1.mp3
@@ -18,3 +20,16 @@ time_fomat = %H%M
 volume = -10
 # 合成位置。 0にすると先頭から合成、3000にすると3秒後から合成
 position = 0
+
+# BGM連結モード
+bgm_fp1=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp2=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp3=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp4=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp5=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp6=C:\Users\user\git\amravie\src\test_data\test2.mp3
+bgm_fp7=C:\Users\user\git\amravie\src\test_data\test1.mp3
+bgm_fp8=C:\Users\user\git\amravie\src\test_data\test2.mp3
+
+
+
