@@ -4,6 +4,7 @@ import glob
 from pydub import AudioSegment #音声操作用　mp3関連の処理
 import ffmpeg
 
+
 # 複数のbgmを連結して1つのbgmにする
 # since 2022-1-3
 # version 1.0.0
@@ -16,14 +17,33 @@ class JoinBgms:
     
     def run(self):
         configs = self.configs
-        input_mp4_fp = configs['input_mp4_fp'];
-        output_mp4_fp = configs['output_mp4_fp'];
+        ouput_join_bgm_fp = configs['ouput_join_bgm_fp']
+        join_bgm_sec = int(configs['join_bgm_sec'])
+        join_intarval = int(configs['join_intarval'])
         
-        print('入力mp4ファイルパス→' +  input_mp4_fp)
-        print('出力mp4ファイルパスXX→' +  output_mp4_fp)
+        print('出力mp3ファイルパス→' +  ouput_join_bgm_fp)
+        print('連結BGM再生時間→' +  str(join_bgm_sec))
+        print('連結BGM間隔時間→' +  str(join_intarval))
         
         bgmFps = self.__getBgmFps(configs) # BGMファイルパスリストを取得する
         
+        audio0 = None
+        silent = AudioSegment.silent(duration=join_intarval * 1000) # サイレント時間を作成
+        
+        for i, bgm_fp in enumerate(bgmFps):
+            print(i)
+            audio1 = AudioSegment.from_file(bgm_fp, "mp3")
+            if i==0:
+                audio0 = audio1
+            else:
+                audio0 = audio0 + silent + audio1
+                
+            sec = audio0.duration_seconds
+            print(sec)
+        
+        
+        audio0.export(ouput_join_bgm_fp,  format="mp3")
+        #audio1 = AudioSegment.from_file(input_mp4_fp, "mp4")
         # position = configs['position']
         # volume = configs['volume']
         # print('position=' + position)
@@ -116,8 +136,13 @@ class JoinBgms:
         
     # BGMファイルパスリストを取得する
     def __getBgmFps(self, configs) :
+        bgmFps = []
+        for num in range(8):
+            key = 'bgm_fp' + str(num)
+            if configs.get(key) != '':
+                bgmFps.append(configs[key])
         
-        return
+        return bgmFps
 
     # 既存ファイルが存在するなら除去
     def __removeExifFile(self, fp):

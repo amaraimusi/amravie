@@ -22,6 +22,7 @@ volume = -10
 position = 0
 
 # BGM連結モード
+bgm_fp0=C:\Users\user\git\amravie\src\test_data\test2.mp3
 bgm_fp1=C:\Users\user\git\amravie\src\test_data\test1.mp3
 bgm_fp2=C:\Users\user\git\amravie\src\test_data\test2.mp3
 bgm_fp3=C:\Users\user\git\amravie\src\test_data\test1.mp3
@@ -29,7 +30,11 @@ bgm_fp4=C:\Users\user\git\amravie\src\test_data\test2.mp3
 bgm_fp5=C:\Users\user\git\amravie\src\test_data\test1.mp3
 bgm_fp6=C:\Users\user\git\amravie\src\test_data\test2.mp3
 bgm_fp7=C:\Users\user\git\amravie\src\test_data\test1.mp3
-bgm_fp8=C:\Users\user\git\amravie\src\test_data\test2.mp3
 
-
+# 連結BGM再生時間
+join_bgm_sec = 53
+# 連結BGM間隔
+join_intarval = 5
+# 連結BGM出力ファイルパス
+ouput_join_bgm_fp = C:\Users\user\git\amravie\src\test_data\join_bgm.mp3
 
