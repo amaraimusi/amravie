@@ -17,7 +17,6 @@ print('amaravie')
 
 configX = ConfigX();
 configs = configX.getConfigs('./config.txt');
-pprint.pprint(configs)
 
 mode = configs['mode']
 

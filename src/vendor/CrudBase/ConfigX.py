@@ -43,8 +43,7 @@ class ConfigX:
         u = dt.strftime(time_fomat)
         
         left_path = self.__stringLeftRev(input_mp4_fp, '.')
-        print(left_path)
-        
+
         if not configs.get(field_mp4):
             configs[field_mp4] = left_path + '_' + u + '.mp4'
             
