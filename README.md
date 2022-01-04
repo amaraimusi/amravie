@@ -42,6 +42,13 @@ bgm_fp5=C:\Users\user\git\amravie\src\test_data\test1.mp3
 bgm_fp6=C:\Users\user\git\amravie\src\test_data\test2.mp3
 bgm_fp7=C:\Users\user\git\amravie\src\test_data\test1.mp3
 bgm_fp8=C:\Users\user\git\amravie\src\test_data\test2.mp3
+
+# 連結BGM再生時間（秒）
+join_bgm_sec = 50
+# 連結BGM間隔（秒）
+join_intarval = 5
+# 連結BGM出力ファイルパス
+ouput_join_bgm_fp = C:\Users\user\git\amravie\src\test_data\join_bgm.mp3
 ```
 
 
