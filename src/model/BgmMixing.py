@@ -19,105 +19,80 @@ class BgmMixing:
         input_mp4_fp = configs['input_mp4_fp'];
         output_mp4_fp = configs['output_mp4_fp'];
         
+        #joinBtm = self.joinBgm()
+        
+        
         print('入力mp4ファイルパス→' +  input_mp4_fp)
         print('出力mp4ファイルパス→' +  output_mp4_fp)
         
+        video_sec = self.__getVideoSec(input_mp4_fp) #    動画の再生時間を取得する
+        print('入力mp4の再生時間→' +  str(video_sec))
+        
+        print('bgmを連結します。')
+        ouput_join_bgm_fp = self.joinBgm(video_sec)
+        
+        self.mixing(input_mp4_fp, ouput_join_bgm_fp, output_mp4_fp)
+        
+        
+        
+    def joinBgm(self, join_bgm_sec):
+        configs = self.configs
+        ouput_join_bgm_fp = configs['ouput_join_bgm_fp']
+        join_intarval = int(configs['join_intarval'])
+        
+        print('連結BGM再生時間→' +  str(join_bgm_sec))
+        print('連結BGM間隔時間→' +  str(join_intarval))
+        
         bgmFps = self.__getBgmFps(configs) # BGMファイルパスリストを取得する
         
-        # position = configs['position']
-        # volume = configs['volume']
-        # print('position=' + position)
-        # print('volume=' + volume)
-        # position = int(position);
-        # volume = int(volume);
-        #
-        # ext = self.__stringRightRev(input_mp4_fp, '.')
-        # ext = ext.lower()
-        # if ext != 'mp4':
-        #     print('mp4ファイルでありません。処理を中断します。')
-        #     exit()
-        #
-        # ext = self.__stringRightRev(input_mp3_fp, '.')
-        # ext = ext.lower()
-        # if ext != 'mp3':
-        #     print('合成オーディオファイルはmp3ファイルでありません。処理を中断します。')
-        #     exit()
-        #
-        # #■■■□□□■■■□□□一時出力ファイルが必要なので保留
-        # # tmp_fn = 'tmp' + u +  ' .mp3'
-        # #
-        #
-        # left_path = self.__stringLeftRev(input_mp4_fp, '.') # 拡張子から左側のパス
-        #
-        # #■■■□□□■■■□□□一時出力ファイルが必要なので保留
-        # # output_mp4_fp = left_path + '_' + u + '.mp4'
-        # # print('出力ファイルパスmp4→' +  output_mp4_fp)
-        # #
-        # #
-        # #
-        # # 動画の再生時間を取得する（秒）
-        # mov_duration = self.__getDurationForMp4Ffmeg(input_mp4_fp)
-        # print(f'入力mp4ファイルの再生時間→{mov_duration}')
-        #
-        # print('動画の元音声を読込')
-        # audio1 = AudioSegment.from_file(input_mp4_fp, "mp4")
-        # audio1_duration =audio1.duration_seconds ; # audio1の再生時間を取得
-        # print(f'元音声の再生時間→{audio1_duration}')
-        #
-        # # 映像の再生時間と元音声の再生時間が2秒以上乖離しているなら元音声に無音を追加して、調整をする。
-        # if mov_duration > audio1_duration + 2:
-        #     print('入力mp4の映像の再生時間と音声が著しく乖離しています。なので無音を追加して調整します。')
-        #     print('動画の再生時間→' + str(mov_duration))
-        #     print('音声の再生時間→' + str(audio1_duration))
-        #     add_ms = (mov_duration - audio1_duration) * 1000;
-        #     print(audio1_duration)
-        #     add_silent = AudioSegment.silent(duration=add_ms) #１秒
-        #     audio1 = audio1 + add_silent;
-        #     print(f'元音声の再生時間を調整→{str(audio1.duration_seconds)}'  )
-        #
-        #
-        # print('入力mp3ファイルを読み込みます')
-        # audio2 = AudioSegment.from_file(input_mp3_fp, "mp3")
-        #
-        # print('入力mp3の音量調整')
-        # audio2 = audio2 + volume #音量を変更
-        # print(f'入力mp3の再生時間→{str(audio2.duration_seconds)}'  )
-        #
-        #
-        # print('元音声と入力mp3のミキシングして、ミックスした音声を仮mp3として出力します。')
-        # tmp_mp3_fp = left_path + '_tmp.mp3'
-        # self.__removeExifFile(tmp_mp3_fp) # 既存ファイルを除去
-        # audio3 = audio1.overlay(audio2, position=position)
-        # audio3.export(tmp_mp3_fp,  format="mp3")
-        #
-        #
-        # print('映像のみの動画である仮mp4を生成する。')
-        # tmp_mp4_fp = left_path + '_tmp.mp4' 
-        # self.__removeExifFile(tmp_mp4_fp) # 既存ファイルを除去
-        # self.videoOnly(input_mp4_fp, tmp_mp4_fp)
-        #
-        #
-        # self.__removeExifFile(output_mp4_fp) # 既存ファイルを除去
-        #
-        # # 映像を読みこむ
-        # print('映像と音声の再結合処理中...')
-        # stream_video = ffmpeg.input(tmp_mp4_fp)
-        # stream_audio = ffmpeg.input(tmp_mp3_fp)
-        # stream = ffmpeg.output(stream_video, stream_audio, output_mp4_fp, vcodec="copy", acodec="copy")
-        # print('最終出力中...')
-        # ffmpeg.run(stream)
-        # print(f'最終出力→{output_mp4_fp}')
-        #
-        # # 既存ファイルを除去
-        # self.__removeExifFile(tmp_mp4_fp) 
-        # self.__removeExifFile(tmp_mp3_fp) 
+        audio0 = None
+        silent = AudioSegment.silent(duration=join_intarval * 1000) # サイレント時間を作成
         
+        # BGMをサイレントを間隔に入れつつ結合していく。
+        for i, bgm_fp in enumerate(bgmFps):
+            print('連結BGM→' + bgm_fp)
+            audio1 = AudioSegment.from_file(bgm_fp, "mp3")
+            if i==0:
+                audio0 = audio1
+            else:
+                audio0 = audio0 + silent + audio1
+                
+            sec = audio0.duration_seconds
+            print(sec)
+            
+            if join_bgm_sec < sec:
+                break
+        
+        # 連結BGM再生時間をカットする。
+        audio0 = audio0[0:join_bgm_sec * 1000]
+        
+        # BGMの末尾にフェードアウトを入れる
+        audio0 = audio0.fade_out(5000)
+        
+        audio0.export(ouput_join_bgm_fp,  format="mp3")
+        
+        print('出力結合mp3ファイルパス→' +  ouput_join_bgm_fp)
+        
+        return ouput_join_bgm_fp
+        
+    
+    # 動画の再生時間を取得する
+    def __getVideoSec(self, mp4_fp):
+        probe = ffmpeg.probe(mp4_fp)
+        movInfo = probe['streams'][0];
+        video_sec = float(movInfo['duration']); # 動画再生時間を取得
+        return video_sec
         
         
     # BGMファイルパスリストを取得する
     def __getBgmFps(self, configs) :
+        bgmFps = []
+        for num in range(8):
+            key = 'bgm_fp' + str(num)
+            if configs.get(key) != '':
+                bgmFps.append(configs[key])
         
-        return
+        return bgmFps
 
     # 既存ファイルが存在するなら除去
     def __removeExifFile(self, fp):
@@ -187,5 +162,108 @@ class BgmMixing:
         # 映像オブジェクトの解放
         movie.release()
         print(f'{output_mp4_fp}の出力完了')
+
+
+    def mixing(self, input_mp4_fp, input_mp3_fp, output_mp4_fp):
+        configs = self.configs
+        
+        print('▼ミキシング')
+        print('入力mp4ファイルパス→' +  input_mp4_fp)
+        print('入力mp3ファイルパス→' +  input_mp3_fp)
+        position = configs['position']
+        volume = configs['volume']
+        print('position=' + position)
+        print('volume=' + volume)
+        position = int(position);
+        volume = int(volume);
+        
+        ext = self.__stringRightRev(input_mp4_fp, '.')
+        ext = ext.lower()
+        if ext != 'mp4':
+            print('mp4ファイルでありません。処理を中断します。')
+            exit()
+            
+        ext = self.__stringRightRev(input_mp3_fp, '.')
+        ext = ext.lower()
+        if ext != 'mp3':
+            print('合成オーディオファイルはmp3ファイルでありません。処理を中断します。')
+            exit()
+            
+        #■■■□□□■■■□□□一時出力ファイルが必要なので保留
+        # tmp_fn = 'tmp' + u +  ' .mp3'
+        #
+        
+        left_path = self.__stringLeftRev(input_mp4_fp, '.') # 拡張子から左側のパス
+
+        #■■■□□□■■■□□□一時出力ファイルが必要なので保留
+        # output_mp4_fp = left_path + '_' + u + '.mp4'
+        # print('出力ファイルパスmp4→' +  output_mp4_fp)
+        #
+        #
+        #
+        # 動画の再生時間を取得する（秒）
+        mov_duration = self.__getDurationForMp4Ffmeg(input_mp4_fp)
+        print(f'入力mp4ファイルの再生時間→{mov_duration}')
+
+        print('動画の元音声を読込')
+        audio1 = AudioSegment.from_file(input_mp4_fp, "mp4")
+        audio1_duration =audio1.duration_seconds ; # audio1の再生時間を取得
+        print(f'元音声の再生時間→{audio1_duration}')
+        
+        # 映像の再生時間と元音声の再生時間が2秒以上乖離しているなら元音声に無音を追加して、調整をする。
+        if mov_duration > audio1_duration + 2:
+            print('入力mp4の映像の再生時間と音声が著しく乖離しています。なので無音を追加して調整します。')
+            print('動画の再生時間→' + str(mov_duration))
+            print('音声の再生時間→' + str(audio1_duration))
+            add_ms = (mov_duration - audio1_duration) * 1000;
+            print(audio1_duration)
+            add_silent = AudioSegment.silent(duration=add_ms) #１秒
+            audio1 = audio1 + add_silent;
+            print(f'元音声の再生時間を調整→{str(audio1.duration_seconds)}'  )
+            
+        
+        print('入力mp3ファイルを読み込みます')
+        audio2 = AudioSegment.from_file(input_mp3_fp, "mp3")
+        
+        print('入力mp3の音量調整')
+        audio2 = audio2 + volume #音量を変更
+        print(f'入力mp3の再生時間→{str(audio2.duration_seconds)}'  )
+        
+        
+        print('元音声と入力mp3のミキシングして、ミックスした音声を仮mp3として出力します。')
+        tmp_mp3_fp = left_path + '_tmp.mp3'
+        self.__removeExifFile(tmp_mp3_fp) # 既存ファイルを除去
+        audio3 = audio1.overlay(audio2, position=position)
+        audio3.export(tmp_mp3_fp,  format="mp3")
+        
+        
+        print('映像のみの動画である仮mp4を生成する。')
+        tmp_mp4_fp = left_path + '_tmp.mp4' 
+        self.__removeExifFile(tmp_mp4_fp) # 既存ファイルを除去
+        self.videoOnly(input_mp4_fp, tmp_mp4_fp)
+        
+        
+        self.__removeExifFile(output_mp4_fp) # 既存ファイルを除去
+        
+        # 映像を読みこむ
+        print('映像と音声の再結合処理中...')
+        stream_video = ffmpeg.input(tmp_mp4_fp)
+        stream_audio = ffmpeg.input(tmp_mp3_fp)
+        stream = ffmpeg.output(stream_video, stream_audio, output_mp4_fp, vcodec="copy", acodec="copy")
+        print('最終出力中...')
+        ffmpeg.run(stream)
+        print(f'最終出力→{output_mp4_fp}')
+        
+        # 既存ファイルを除去
+        self.__removeExifFile(tmp_mp4_fp) 
+        self.__removeExifFile(tmp_mp3_fp) 
+        
+
+    # 既存ファイルが存在するなら除去
+    def __removeExifFile(self, fp):
+        if os.path.exists(fp):
+            os.remove(fp)
+
+
 
         
