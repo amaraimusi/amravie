@@ -15,6 +15,14 @@ input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887.MP4
 input_mp4_fpと同じディレクトリに音声なしmp4とmp3を出力します。
 ```
 
+### 音声なしmp4とmp3を連結する
+
+```
+mode = join_silent_video_and_sound
+input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887_v_only.mp4
+input_mp3_fp = C:\Users\user\git\amravie\src\test_data\join_bgm.mp3
+```
+
 
 ### mp4とmp3をミキシングするモードの設定例
 ```

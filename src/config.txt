@@ -1,16 +1,17 @@
 
 #モード 
 # - split_video_sound mp4を音声なしmp4とmp3に分割します
+# - join_silent_video_and_sound 音声なしmp4とmp3を連結する
 # - mixing_mp4_mp3 mp4とmp3をミキシングするモード
 # - join_bgms 複数のbgmを連結して1つのbgmにする
 # - bgm_mixing 複数のbgmを連結してmp4にミキシングする
-mode = join_bgms
+mode = join_silent_video_and_sound
 
 #入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
 input_mp4_fp = C:\Users\user\git\amravie\src\test_data\MVI_0887_v_only.mp4
 
 # 入力mp3ファイルパス
-input_mp3_fp = C:\Users\user\git\amravie\src\test_data\test1.mp3
+input_mp3_fp = C:\Users\user\git\amravie\src\test_data\join_bgm.mp3
 
 # 出力ファイル名に付加する日時フォーマット
 time_fomat = %H%M

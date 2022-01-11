@@ -9,6 +9,7 @@ import ffmpeg
 import tkinter as tk
 from vendor.CrudBase.ConfigX import ConfigX
 from model.SplitVideoSound import SplitVideoSound
+from model.JoinSilentVideAndSound import JoinSilentVideAndSound
 from model.MixingMp4Mp3 import MixingMp4Mp3
 from model.JoinBgms import JoinBgms
 from model.BgmMixing import BgmMixing
@@ -24,6 +25,11 @@ if(mode == 'split_video_sound'):
     print ('mp4を音声なしmp4とmp3に分割します')
     splitVideoSound = SplitVideoSound(configs)
     splitVideoSound.run()
+    
+if(mode == 'join_silent_video_and_sound'):
+    print ('音声なしmp4とmp3を連結する')
+    joinSilentVideAndSound = JoinSilentVideAndSound(configs)
+    joinSilentVideAndSound.run()
 
 if(mode == 'mixing_mp4_mp3'):
     print ('mp4にmp3をミキシングします')
