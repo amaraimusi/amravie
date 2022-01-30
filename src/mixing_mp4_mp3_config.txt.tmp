@@ -1,0 +1,18 @@
+
+#モード 
+# - split_video_sound mp4を音声なしmp4とmp3に分割します
+# - join_silent_video_and_sound 音声なしmp4とmp3を連結する
+# - mixing_mp4_mp3 mp4とmp3をミキシングするモード
+# - join_bgms 複数のbgmを連結して1つのbgmにする
+# - bgm_mixing 複数のbgmを連結してmp4にミキシングする
+mode = mixing_mp4_mp3
+
+# 出力ファイル名に付加する日時フォーマット
+time_fomat = %H%M
+
+input_mp4_fp = C:\Users\user\Videos\movie_edit\n27\n27a4.mp4
+input_mp3_fp = C:\Users\user\Videos\movie_edit\n27\join_bgm.mp3
+volume = -10
+position = 0
+
+

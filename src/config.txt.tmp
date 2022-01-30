@@ -8,7 +8,7 @@
 mode = bgm_mixing
 
 #入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
-input_mp4_fp = C:\Users\user\Videos\movie_edit\n26\n26a0.mp4
+input_mp4_fp = C:\Users\user\Videos\movie_edit\n26\a26a3.mp4
 
 # 入力mp3ファイルパス
 input_mp3_fp = C:\Users\user\git\amravie\src\test_data\join_bgm.mp3

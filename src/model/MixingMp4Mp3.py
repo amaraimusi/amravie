@@ -75,6 +75,7 @@ class MixingMp4Mp3:
             
         
         print('入力mp3ファイルを読み込みます')
+        print(input_mp3_fp);
         audio2 = AudioSegment.from_file(input_mp3_fp, "mp3")
         
         print('入力mp3の音量調整')
