@@ -1,0 +1,6 @@
+
+
+#入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
+target_dir = C:\Users\user\git\test\tmp
+
+
