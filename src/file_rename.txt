@@ -1,6 +1,6 @@
 
 
 #入力mp4ファイルパス (多くのモードで共通して入用するファイルパス）
-target_dir = C:\Users\user\Videos\movie_edit\100ANDRO
+target_dir = E:\backup_kenji\mov\arc\100ANDRO
 
 
