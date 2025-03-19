@@ -4,8 +4,7 @@ import ffmpeg
 
 def create_time_lapse(input_video_path, output_video_path, speed_factor):
     """
-    指定した倍率でタイムラプス動画を生成します（音声も含む）。
-    音声の音量を半分に下げる調整を加えています。
+    指定した倍率でタイムラプス動画を生成します。
 
     Args:
         input_video_path (str): 入力動画ファイルのパス。
@@ -17,37 +16,14 @@ def create_time_lapse(input_video_path, output_video_path, speed_factor):
         sys.exit(1)
 
     try:
-        # 動画の速度変更
-        video = (
+        # FFmpegでタイムラプス動画を生成
+        (
             ffmpeg
             .input(input_video_path)
             .filter('setpts', f'{1 / speed_factor}*PTS')  # 動画の速度を変更
-        )
-
-        # 音声の速度変更と音量調整（音量を半分に下げる例）
-        if speed_factor > 2:
-            audio = (
-                ffmpeg
-                .input(input_video_path)
-                .filter('atempo', 2)
-                .filter('atempo', speed_factor / 2)
-                .filter('volume', '0.1')  # 音量を1/10にする
-            )
-        else:
-            audio = (
-                ffmpeg
-                .input(input_video_path)
-                .filter('atempo', speed_factor)
-                .filter('volume', '0.5')  # 音量を半分に下げる
-            )
-
-        # 動画と音声を結合して出力
-        (
-            ffmpeg
-            .output(video, audio, output_video_path, r=30, vcodec='libx264', acodec='aac')  # フレームレートとコーデック指定
+            .output(output_video_path, r=30)  # 出力フレームレートを指定
             .run(overwrite_output=True)
         )
-
         print(f"タイムラプス動画を生成しました: {output_video_path}")
     except ffmpeg.Error as e:
         print(f"FFmpegでエラーが発生しました: {e.stderr.decode('utf8')}")
