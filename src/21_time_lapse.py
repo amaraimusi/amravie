@@ -12,6 +12,11 @@ def create_time_lapse(input_video_path, output_video_path, speed_factor):
         output_video_path (str): 出力動画ファイルのパス。
         speed_factor (float): タイムラプスの速度倍率。
     """
+    
+    if output_video_path == "":
+        base, ext = os.path.splitext(input_video_path)
+        output_video_path = f"{base}_b{ext}"
+        
     if not os.path.exists(input_video_path):
         print(f"入力動画ファイルが見つかりません: {input_video_path}")
         sys.exit(1)
