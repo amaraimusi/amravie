@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ExtGather — 拡張子別ファイル収集ツールの使い方</title>
+<style>
+body{margin:0;background:#f4f1e9;color:#18212b;font-family:"Yu Gothic UI",sans-serif;line-height:1.8}header{background:#176b67;color:white;padding:36px max(5vw,24px)}main{max-width:960px;margin:32px auto;padding:0 24px 48px}h1{margin:0}h2{margin-top:36px;color:#176b67}pre{background:#18212b;color:#fff;padding:20px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}code{overflow-wrap:anywhere}table{width:100%;border-collapse:collapse;background:white}td,th{padding:12px;border:1px solid #d9d4c8;text-align:left}a{color:#176b67}.note{padding:16px;background:#fffdf8;border-left:4px solid #176b67}
+</style></head><body>
+<header><h1>ExtGather</h1><p>拡張子別ファイル収集ツール</p></header>
+<main><a href="../index.html">← ツール一覧</a>
+<p>指定した拡張子のファイルを、探索対象フォルダのすべての下層から探し、出力フォルダの直下にコピーします。元ファイルは保持します。Python 3.9以上で動作し、追加ライブラリは不要です。</p>
+<nav><a href="#start">実行例</a> / <a href="#args">引数</a> / <a href="#names">同名ファイル</a> / <a href="#update">繰り返し実行</a> / <a href="#record">収集記録</a> / <a href="#errors">注意点</a></nav>
+<h2 id="start">1. Windowsのコマンドプロンプトで実行</h2>
+<pre>cd /d C:\Users\user\git\amravie\src\ExtGather
+python ext_gather.py srt "E:\backup_kenji\mov" "E:\backup_kenji\mov\srt"</pre>
+<p>出力フォルダはなければ自動作成します。パスに空白がある場合は必ずダブルクォートで囲んでください。</p>
+<p>コピー前に予定を確認するには、次のように実行します。</p>
+<pre>python ext_gather.py srt "E:\backup_kenji\mov" "E:\backup_kenji\mov\srt" --dry-run</pre>
+<p><code>--dry-run</code> はファイルもフォルダも作成・変更しません。スキップ分は件数に含めます。</p>
+<h2 id="args">2. 引数</h2>
+<pre>python ext_gather.py 拡張子 探索対象ディレクトリ 出力ディレクトリ [--dry-run]
+python ext_gather.py --help</pre>
+<table><tr><th>引数</th><th>説明</th></tr>
+<tr><td>拡張子</td><td><code>srt</code> と <code>.srt</code> のどちらでも指定できます。大文字小文字を区別しません。1回につき1種類です。</td></tr>
+<tr><td>探索対象ディレクトリ</td><td>存在するフォルダを指定します。直下とすべての下層を探索します。</td></tr>
+<tr><td>出力ディレクトリ</td><td>収集先。探索対象の下に置いても、このフォルダとその下層を探索から除外します。</td></tr>
+<tr><td>--dry-run</td><td>コピー・更新の予定と集計だけを表示します。</td></tr></table>
+<h2 id="names">3. 同名ファイルの扱い</h2>
+<p>最初のファイルには元のファイル名を使用します。同名ファイルがあれば、<code>元の名前__親フォルダ名__パスの識別子.srt</code> のように変更します。それでも衝突すれば連番を加えます。出力先に元からある未登録ファイルの名前も避けます。</p>
+<p>コピー元の絶対パスと出力名の対応を保存するため、後から同名ファイルが増えても、すでに収集したファイルの出力名は変わりません。コピー元の移動・改名は別ファイルとして扱います。</p>
+<h2 id="update">4. 繰り返し実行と更新日時</h2>
+<ul><li>出力ファイルがない場合はコピーします。</li><li>コピー元の最終更新日時が出力ファイルより新しければ上書きします。</li><li>更新日時が同じ、または出力ファイルのほうが新しい場合はスキップします。</li><li>コピー時に元の更新日時を保持します。内容が変わっても更新日時が新しくなければ更新しません。</li><li>元ファイルが削除されても、過去に収集したファイルは削除しません。</li></ul>
+<h2 id="record">5. 出力フォルダの収集記録</h2>
+<p><code>README.md</code> に、実行日時、今回の探索先・拡張子、件数、各出力ファイルのコピー元絶対パスと出力更新日時を記載します。過去の収集分も含みます。</p>
+<p><code>.extgather.json</code> は次回実行のための対応記録です。出力ファイルと一緒に保持してください。削除・編集すると対応を復元できず、追加コピーになることがあります。README.mdは実行のたびに再生成されるため、手書きメモは別ファイルに保存してください。</p>
+<h2 id="errors">6. 注意点とエラー対応</h2>
+<ul><li>同じ出力フォルダを複数の実行から同時に更新することはできません。</li><li>強制終了後に <code>.extgather.lock</code> が残ったら、他の実行が動いていないことを確認して、このロックファイルだけ削除してください。</li><li>シンボリックリンク、ジャンクションなどのリンクファイル・フォルダは探索しません。</li><li>探索先と出力先が同じ、または出力先が探索先を含む親フォルダの場合はエラーになります。</li><li>読み取り・コピーに失敗した項目はエラーを表示し、可能な残りの項目を続行します。収集記録に未コピーの行が残った場合は、問題を解消して再実行できます。</li><li>終了コードは成功時0、処理エラー時1、引数の使い方が不正な場合2です。</li><li>Windowsやファイルシステムのパス長・アクセス権制限がある場合は、表示されたパスを確認してください。</li></ul>
+<div class="note">収集結果の例: 新規 10 / 更新 2 / スキップ 30 / エラー 0<br>更新日時で判断するため、収集先を手作業で編集して新しい日時になったファイルは保護されます。</div>
+</main></body></html>

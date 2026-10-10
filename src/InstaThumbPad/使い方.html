@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InstaThumbPad｜サムネ余白メーカーの使い方</title>
+<style>
+body{margin:0;background:#f4f1e9;color:#18212b;font-family:"Yu Gothic UI",sans-serif;line-height:1.9}main{max-width:900px;margin:auto;padding:36px 24px 64px}h1{line-height:1.4}h2{margin-top:36px;color:#176b67}pre{background:#182e35;color:#fff;padding:18px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%;background:white}td,th{padding:12px;border:1px solid #d9d4c8;text-align:left}.note{background:#e0eeea;padding:18px;border-radius:10px}a{color:#176b67}
+</style></head><body><main>
+<a href="../index.html">← ツール一覧</a>
+<h1>InstaThumbPad<br><small>サムネ余白メーカー</small></h1>
+<p>元サムネイルを拡大縮小せず、余白を付けた背景の中央に配置するPython 3用ツールです。背景だけを縦横比を保って拡大縮小します。</p>
+<h2>1. 初回の準備</h2>
+<p>Windowsのコマンドプロンプトで、次のコマンドを実行します。Python 3.9以上とPillowが必要です。</p>
+<pre>cd /d "C:\Users\user\git\amravie\src\InstaThumbPad"
+python -m pip install -r requirements.txt</pre>
+<h2>2. 実行方法</h2>
+<pre>python insta_thumb_pad.py "背景画像" "元サムネ画像" ["出力画像"] 余白率</pre>
+<table><tr><th>引数</th><th>指定内容</th></tr>
+<tr><td>背景画像</td><td>背景に使う画像のファイルパス。</td></tr>
+<tr><td>元サムネ画像</td><td>中央に重ねる画像のファイルパス。</td></tr>
+<tr><td>出力画像（省略可）</td><td>省略時は元画像と同じフォルダに「元画像名_instapad.png」を作ります。指定する場合は余白率の前に置きます。</td></tr>
+<tr><td>余白率</td><td>元サムネ幅に対する左右合計の追加割合（％）。20で合計20％、左右それぞれ約10％です。数値のみ、0～1000、小数も使用できます。0.2は0.2％です。</td></tr></table>
+<h2>3. テスト画像で試す</h2>
+<pre>python insta_thumb_pad.py "back1.png" "サムネ45.png" 20</pre>
+<p>「サムネ45_instapad.png」を作成します。元サムネは1122×1402のまま、出力は1347×2393ピクセルです。</p>
+<p>出力先を指定する例：</p>
+<pre>python insta_thumb_pad.py "back1.png" "サムネ45.png" "余白つき.png" 40</pre>
+<h2>4. 実際のデータで使う</h2>
+<p>以下はご指定のパスを使った例です。ドライブとフォルダが存在する環境で実行してください。</p>
+<pre>python insta_thumb_pad.py "E:\backup\_kenji\mov\amaraimusi\_no\_utabako\common\back1.png" "E:\backup\_kenji\mov\amaraimusi\_no\_utabako\a028\シーンイラスト\サムネtk.png" 20</pre>
+<h2>5. サイズの計算</h2>
+<p>出力幅 = 元サムネ幅 × (1 + 余白率 ÷ 100)（小数点以下切り上げ）。出力高さ = 背景の元高さ × 出力幅 ÷ 背景の元幅（最も近い整数に丸めます）。元サムネは上下左右の中央に置きます。余白が奇数ピクセルの場合、右・下が1ピクセル多くなります。</p>
+<div class="note">背景の高さが元サムネより小さくなる場合はエラーで停止します。縦長の背景に変更するか、表示された目安以上に余白率を増やしてください。元サムネの縮小・切り抜きは行いません。</div>
+<h2>6. 保存と注意点</h2>
+<ul><li>出力はPNG・JPEG・WebPに対応します。画質の劣化を避けるならPNGを使います。JPEGは非可逆圧縮で、透明部分は白になります。PNGとWebPでは透明部分を保持します。</li>
+<li>既存ファイルは上書きしません。再実行時は別の出力名を指定してください。元画像への上書きも禁止しています。</li>
+<li>相対パスはコマンドプロンプトの現在のフォルダが基準です。出力先のフォルダは先に作成してください。</li>
+<li>EXIFの向き情報を反映してから配置します。アニメーション画像は先頭フレームを使用します。</li>
+<li>メモリ使用量を抑えるため、出力は8000万画素までです。</li>
+<li>Instagramでの表示結果を見ながら余白率を調整してください。表示枠によって必要な余白は異なります。</li></ul>
+<pre>python insta_thumb_pad.py --help</pre>
+</main></body></html>

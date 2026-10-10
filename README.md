@@ -1,6 +1,30 @@
 # amravie
 動画加工ツール Amravie
 
+## MP4のシーン切替時刻を検出する
+
+クロスフェードのない動画を一定間隔で比較し、画面全体の色差からシーン切替を検出します。
+
+```powershell
+pip install -r requirements.txt
+python src/scene_timestamp.py C:\path\to\video.mp4
+```
+
+結果は入力動画と同じ場所の `video_scenes.csv` に保存されます。画面内の動きで
+誤検出する場合は閾値を上げ、切替を見逃す場合は下げます。
+
+```powershell
+python src/scene_timestamp.py video.mp4 --threshold 0.15
+python src/scene_timestamp.py video.mp4 --threshold 0.08
+python src/scene_timestamp.py video.mp4 --format json
+```
+
+主な調整項目:
+
+- `--threshold`: 色差の閾値（既定値 0.12）
+- `--interval`: フレーム比較間隔（既定値 0.2秒）
+- `--min-scene`: 最短シーン長（既定値 3秒）
+
 ## info
 @since 2021-12-31
 @version 0.0.1

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pythonツール一覧</title>
+<style>
+:root{--ink:#18212b;--muted:#64717d;--paper:#f4f1e9;--card:#fffdf8;--accent:#176b67;--line:#d9d4c8}
+*{box-sizing:border-box} body{margin:0;color:var(--ink);background:var(--paper);font-family:"Yu Gothic UI","Noto Sans JP",sans-serif;line-height:1.7}
+header{background:linear-gradient(120deg,#123f45,#176b67);color:white;padding:54px max(5vw,24px) 42px} .eyebrow{letter-spacing:.14em;opacity:.72;font-size:.82rem}
+h1{font-size:clamp(2rem,5vw,3.4rem);margin:.1em 0} header p{max-width:720px;margin:0;opacity:.86} main{width:min(1120px,90vw);margin:28px auto 64px}
+.toolbar{display:flex;gap:14px;align-items:center;margin-bottom:22px} input{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:white;font-size:1rem}
+#count{white-space:nowrap;color:var(--muted)} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:23px;box-shadow:0 7px 24px #27343a0b} .card-head{display:flex;justify-content:space-between;gap:16px;align-items:start}
+h2{margin:0;font-size:1.35rem} .ja{margin:0;color:var(--accent);font-weight:700} .kind{background:#dcece8;color:#165653;padding:3px 9px;border-radius:99px;font-size:.76rem;white-space:nowrap}
+.purpose{font-size:1.04rem} dl{margin:0} dt{font-size:.78rem;font-weight:700;color:var(--muted);margin-top:12px} dd{margin:1px 0 0} code{background:#edeae2;border-radius:5px;padding:2px 5px;overflow-wrap:anywhere}
+.hidden{display:none} footer{text-align:center;color:var(--muted);padding:0 20px 35px;font-size:.85rem} @media(max-width:520px){.grid{grid-template-columns:1fr}.card-head{display:block}.kind{display:inline-block;margin-top:8px}}
+</style></head><body>
+<header><div class="eyebrow">AMRAVIE / TOOL CATALOG</div><h1>Pythonツール一覧</h1><p>src 配下にある実行可能な Python ツールの目的、使い方、注意点をまとめた一覧です。データの正本は python_tools.sqlite です。</p></header>
+<main><div class="toolbar"><input id="search" type="search" placeholder="名前、目的、ファイル名などで検索…" autofocus><span id="count">11 件</span></div><section class="grid">
+        <article class="card" data-search="1 extgather 拡張子別ファイル収集ツール 指定拡張子のファイルを下層フォルダまで探索し、1つの出力フォルダへ収集する。 python extgather\ext_gather.py srt &quot;e:\backup_kenji\mov&quot; &quot;e:\backup_kenji\mov\srt&quot; 同名ファイルを区別し、コピー元が新しい場合のみ更新。出力フォルダは探索から除外。readme.mdにコピー元を記録し、--dry-runで事前確認できる。 extgather/ext_gather.py コマンドライン python 3.9以上（標準ライブラリのみ） 2026-10-10t20:30:48+09:00">
+          <div class="card-head"><div><h2>ExtGather</h2><p class="ja">拡張子別ファイル収集ツール</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">指定拡張子のファイルを下層フォルダまで探索し、1つの出力フォルダへ収集する。</p>
+          <p><a href="ExtGather/使い方.html">使い方（HTML）</a></p>
+          <dl>
+            <dt>使用例</dt><dd><code>python ExtGather\ext_gather.py srt &quot;E:\backup_kenji\mov&quot; &quot;E:\backup_kenji\mov\srt&quot;</code></dd>
+            <dt>その他説明</dt><dd>同名ファイルを区別し、コピー元が新しい場合のみ更新。出力フォルダは探索から除外。README.mdにコピー元を記録し、--dry-runで事前確認できる。</dd>
+            <dt>実行ファイル</dt><dd><code>ExtGather/ext_gather.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3.9以上（標準ライブラリのみ）</dd>
+            <dt>最終更新日</dt><dd>2026-10-10T20:30:48+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="2 instathumbpad サムネ余白メーカー 元サムネイルを原寸で背景の中央に重ね、横幅に余白のある画像を作る。 python instathumbpad\insta_thumb_pad.py &quot;instathumbpad\back1.png&quot; &quot;instathumbpad\サムネ45.png&quot; 20 余白率は左右合計の追加割合（％）。背景のみ縦横比を保って伸縮する。出力省略時は元画像名_instapad.png。既存ファイルは上書きしない。 instathumbpad/insta_thumb_pad.py コマンドライン python 3.9以上, pillow 2026-09-28t16:02:24+09:00">
+          <div class="card-head"><div><h2>InstaThumbPad</h2><p class="ja">サムネ余白メーカー</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">元サムネイルを原寸で背景の中央に重ね、横幅に余白のある画像を作る。</p>
+          <p><a href="InstaThumbPad/使い方.html">使い方（HTML）</a></p>
+          <dl>
+            <dt>使用例</dt><dd><code>python InstaThumbPad\insta_thumb_pad.py &quot;InstaThumbPad\back1.png&quot; &quot;InstaThumbPad\サムネ45.png&quot; 20</code></dd>
+            <dt>その他説明</dt><dd>余白率は左右合計の追加割合（％）。背景のみ縦横比を保って伸縮する。出力省略時は元画像名_instapad.png。既存ファイルは上書きしない。</dd>
+            <dt>実行ファイル</dt><dd><code>InstaThumbPad/insta_thumb_pad.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3.9以上, Pillow</dd>
+            <dt>最終更新日</dt><dd>2026-09-28T16:02:24+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="10 clipjoiner 正規化済み動画連結 形式が揃った複数の mp4 を並べ替え、映像を再エンコードせず1本に連結する。 python clip_joiner\clip_joiner.py &quot;input_folder&quot; &quot;joined.mp4&quot; --sort name --overwrite 名前・更新日時・作成日時で並べ替え可能。形式の互換性を事前確認し、完成動画と同じベース名の sqlite とテキストレポートも作る。通常は音声もcopy、問題時は --audio-codec ac3。出力省略時は入力フォルダの親へフォルダ名.mp4を作る。 clip_joiner/clip_joiner.py コマンドライン python 3, ffmpeg, ffprobe 2026-08-27t18:23:25+09:00">
+          <div class="card-head"><div><h2>ClipJoiner</h2><p class="ja">正規化済み動画連結</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">形式が揃った複数の MP4 を並べ替え、映像を再エンコードせず1本に連結する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python clip_joiner\clip_joiner.py &quot;input_folder&quot; &quot;joined.mp4&quot; --sort name --overwrite</code></dd>
+            <dt>その他説明</dt><dd>名前・更新日時・作成日時で並べ替え可能。形式の互換性を事前確認し、完成動画と同じベース名の SQLite とテキストレポートも作る。通常は音声もcopy、問題時は --audio-codec ac3。出力省略時は入力フォルダの親へフォルダ名.mp4を作る。</dd>
+            <dt>実行ファイル</dt><dd><code>clip_joiner/clip_joiner.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, FFmpeg, ffprobe</dd>
+            <dt>最終更新日</dt><dd>2026-08-27T18:23:25+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="8 clipnormalizer 動画クリップ正規化 mp4素材を、後で安全に連結しやすい同一解像度・cfr・ゼロ開始ptsの形式へ変換する。 python clipnormalizer\clip_normalizer.py &quot;input.mp4&quot; &quot;normalized.mp4&quot; --fps 30 --width 1920 --height 1080 既定は1920x1080、30fps、h.264/libx264、aac 48khz、crf 18。縦横比を維持して黒帯で埋め、変換後にコーデック、寸法、fps、開始時刻、音声を検証する。幅と高さは偶数が必要。 clipnormalizer/clip_normalizer.py コマンドライン python 3, ffmpeg, ffprobe 2026-08-22t13:44:17+09:00">
+          <div class="card-head"><div><h2>ClipNormalizer</h2><p class="ja">動画クリップ正規化</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">MP4素材を、後で安全に連結しやすい同一解像度・CFR・ゼロ開始PTSの形式へ変換する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python ClipNormalizer\clip_normalizer.py &quot;input.mp4&quot; &quot;normalized.mp4&quot; --fps 30 --width 1920 --height 1080</code></dd>
+            <dt>その他説明</dt><dd>既定は1920x1080、30fps、H.264/libx264、AAC 48kHz、CRF 18。縦横比を維持して黒帯で埋め、変換後にコーデック、寸法、FPS、開始時刻、音声を検証する。幅と高さは偶数が必要。</dd>
+            <dt>実行ファイル</dt><dd><code>ClipNormalizer/clip_normalizer.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, FFmpeg, ffprobe</dd>
+            <dt>最終更新日</dt><dd>2026-08-22T13:44:17+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="9 clipnormalizer batch 動画クリップ一括正規化 ディレクトリ内の mp4 をまとめて clipnormalizer と同じ連結向け形式へ正規化する。 python clipnormalizer\clip_normalizer_batch.py &quot;input_folder&quot; &quot;output_folder&quot; --recursive --overwrite 出力先省略時は入力フォルダ名_normalizedを作る。--recursive でサブフォルダも処理し、相対構造を維持する。既存出力は --overwrite がなければスキップし、各ファイルを検証後に確定する。 clipnormalizer/clip_normalizer_batch.py コマンドライン python 3, clip_normalizer.py, ffmpeg, ffprobe 2026-08-22t13:57:20+09:00">
+          <div class="card-head"><div><h2>ClipNormalizer Batch</h2><p class="ja">動画クリップ一括正規化</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">ディレクトリ内の MP4 をまとめて ClipNormalizer と同じ連結向け形式へ正規化する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python ClipNormalizer\clip_normalizer_batch.py &quot;input_folder&quot; &quot;output_folder&quot; --recursive --overwrite</code></dd>
+            <dt>その他説明</dt><dd>出力先省略時は入力フォルダ名_normalizedを作る。--recursive でサブフォルダも処理し、相対構造を維持する。既存出力は --overwrite がなければスキップし、各ファイルを検証後に確定する。</dd>
+            <dt>実行ファイル</dt><dd><code>ClipNormalizer/clip_normalizer_batch.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, clip_normalizer.py, FFmpeg, ffprobe</dd>
+            <dt>最終更新日</dt><dd>2026-08-22T13:57:20+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="5 directory list ディレクトリ構造一覧 指定ディレクトリのフォルダ・ファイル構造をツリー形式で標準出力へ表示する。 python dir_list.py &quot;c:\users\user\git\amravie\src&quot; 3 第2引数は表示する階層数で、省略時は2階層。名前順に表示し、アクセス拒否の場所はその旨を表示する。 dir_list.py コマンドライン python 3（標準ライブラリのみ） 2025-03-19t11:48:06+09:00">
+          <div class="card-head"><div><h2>Directory List</h2><p class="ja">ディレクトリ構造一覧</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">指定ディレクトリのフォルダ・ファイル構造をツリー形式で標準出力へ表示する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python dir_list.py &quot;C:\Users\user\git\amravie\src&quot; 3</code></dd>
+            <dt>その他説明</dt><dd>第2引数は表示する階層数で、省略時は2階層。名前順に表示し、アクセス拒否の場所はその旨を表示する。</dd>
+            <dt>実行ファイル</dt><dd><code>dir_list.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3（標準ライブラリのみ）</dd>
+            <dt>最終更新日</dt><dd>2025-03-19T11:48:06+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="6 file rename ファイル更新日付き一括リネーム 設定ファイルで指定したフォルダ内の各ファイル名の先頭に更新日を付け、一括変更する。 file_rename.txt の target_dir を設定し、src で python file_rename.py 更新日は yy_mmdd 形式。拡張子を問わずフォルダ直下の全項目を処理するため、実行前に対象フォルダを必ず確認すること。既に日付が付いた名前も再実行すると再度変更される。 file_rename.py 設定ファイル型コマンドライン python 3, vendor.crudbase.configx, file_rename.txt 2023-06-12t15:41:01+09:00">
+          <div class="card-head"><div><h2>File Rename</h2><p class="ja">ファイル更新日付き一括リネーム</p></div><span class="kind">設定ファイル型コマンドライン</span></div>
+          <p class="purpose">設定ファイルで指定したフォルダ内の各ファイル名の先頭に更新日を付け、一括変更する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>file_rename.txt の target_dir を設定し、src で python file_rename.py</code></dd>
+            <dt>その他説明</dt><dd>更新日は yy_mmdd 形式。拡張子を問わずフォルダ直下の全項目を処理するため、実行前に対象フォルダを必ず確認すること。既に日付が付いた名前も再実行すると再度変更される。</dd>
+            <dt>実行ファイル</dt><dd><code>file_rename.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, vendor.CrudBase.ConfigX, file_rename.txt</dd>
+            <dt>最終更新日</dt><dd>2023-06-12T15:41:01+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="7 scene timestamp 動画シーン時刻検出 mp4 の画面色差からハードカットを検出し、各シーンの開始・終了・長さを csv または json に出力する。 python scene_timestamp.py &quot;input.mp4&quot; --format csv --threshold 0.12 --min-scene 3 既定では0.2秒間隔で比較し、色差閾値0.12、最短シーン3秒。-o を省略すると入力名_scenes.csv/json を入力動画と同じ場所へ作る。検出が少ない場合は --threshold を下げる。 scene_timestamp.py コマンドライン python 3, opencv (cv2), numpy 2026-08-17t14:48:44+09:00">
+          <div class="card-head"><div><h2>Scene Timestamp</h2><p class="ja">動画シーン時刻検出</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">MP4 の画面色差からハードカットを検出し、各シーンの開始・終了・長さを CSV または JSON に出力する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python scene_timestamp.py &quot;input.mp4&quot; --format csv --threshold 0.12 --min-scene 3</code></dd>
+            <dt>その他説明</dt><dd>既定では0.2秒間隔で比較し、色差閾値0.12、最短シーン3秒。-o を省略すると入力名_scenes.csv/json を入力動画と同じ場所へ作る。検出が少ない場合は --threshold を下げる。</dd>
+            <dt>実行ファイル</dt><dd><code>scene_timestamp.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, OpenCV (cv2), NumPy</dd>
+            <dt>最終更新日</dt><dd>2026-08-17T14:48:44+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="3 time lapse 音声付きタイムラプス生成 動画と音声を指定倍率で高速化し、h.264/aac の mp4 として出力する。 python 21_time_lapse.py &quot;input.mp4&quot; &quot;output.mp4&quot; 4 出力先に空文字を指定した場合は入力名に _b を付ける。倍率が2以下なら音量を半分、2より大きい場合は atempo を2段にして音量を1/10にする。出力fpsは30。 21_time_lapse.py コマンドライン python 3, ffmpeg-python, ffmpeg 2025-04-17t20:28:14+09:00">
+          <div class="card-head"><div><h2>Time Lapse</h2><p class="ja">音声付きタイムラプス生成</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">動画と音声を指定倍率で高速化し、H.264/AAC の MP4 として出力する。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python 21_time_lapse.py &quot;input.mp4&quot; &quot;output.mp4&quot; 4</code></dd>
+            <dt>その他説明</dt><dd>出力先に空文字を指定した場合は入力名に _b を付ける。倍率が2以下なら音量を半分、2より大きい場合は atempo を2段にして音量を1/10にする。出力FPSは30。</dd>
+            <dt>実行ファイル</dt><dd><code>21_time_lapse.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, ffmpeg-python, FFmpeg</dd>
+            <dt>最終更新日</dt><dd>2025-04-17T20:28:14+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="4 time lapse ex 無音タイムラプス生成 動画を指定倍率で高速化し、元音声を除去して動画長に合う無音音声を付ける。 python 22_time_lapse_ex.py &quot;input.mp4&quot; &quot;output.mp4&quot; 8 作業ディレクトリに一時ファイル temp_time_lapse.mp4、temp_video.mp4、silent_temp.mp3 を作成し、終了時に削除する。出力fpsは30。 22_time_lapse_ex.py コマンドライン python 3, ffmpeg-python, pydub, ffmpeg 2025-01-14t00:09:32+09:00">
+          <div class="card-head"><div><h2>Time Lapse Ex</h2><p class="ja">無音タイムラプス生成</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">動画を指定倍率で高速化し、元音声を除去して動画長に合う無音音声を付ける。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python 22_time_lapse_ex.py &quot;input.mp4&quot; &quot;output.mp4&quot; 8</code></dd>
+            <dt>その他説明</dt><dd>作業ディレクトリに一時ファイル temp_time_lapse.mp4、temp_video.mp4、silent_temp.mp3 を作成し、終了時に削除する。出力FPSは30。</dd>
+            <dt>実行ファイル</dt><dd><code>22_time_lapse_ex.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3, ffmpeg-python, pydub, FFmpeg</dd>
+            <dt>最終更新日</dt><dd>2025-01-14T00:09:32+09:00</dd>
+          </dl>
+        </article>
+        <article class="card" data-search="11 video scene cutter 動画シーン切り出し mp4 から開始・終了タイムスタンプで指定した範囲を映像・音声付きで切り出す。 python video_scene_cutter\video_scene_cutter.py &quot;input.mp4&quot; &quot;00:03:41,338&quot; &quot;00:03:47,300&quot; -o &quot;scene.mp4&quot; 時刻形式は hh:mm:ss,mmm（小数点も可）。出力省略時は入力動画と同じ場所に自動命名する。h.264 crf 18/aac 192kbpsで再エンコードし、既存ファイルの上書きには --overwrite が必要。 video_scene_cutter/video_scene_cutter.py コマンドライン python 3.9.5以上, ffmpeg 2026-08-21t12:05:15+09:00">
+          <div class="card-head"><div><h2>Video Scene Cutter</h2><p class="ja">動画シーン切り出し</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">MP4 から開始・終了タイムスタンプで指定した範囲を映像・音声付きで切り出す。</p>
+          
+          <dl>
+            <dt>使用例</dt><dd><code>python video_scene_cutter\video_scene_cutter.py &quot;input.mp4&quot; &quot;00:03:41,338&quot; &quot;00:03:47,300&quot; -o &quot;scene.mp4&quot;</code></dd>
+            <dt>その他説明</dt><dd>時刻形式は HH:MM:SS,mmm（小数点も可）。出力省略時は入力動画と同じ場所に自動命名する。H.264 CRF 18/AAC 192kbpsで再エンコードし、既存ファイルの上書きには --overwrite が必要。</dd>
+            <dt>実行ファイル</dt><dd><code>video_scene_cutter/video_scene_cutter.py</code></dd>
+            <dt>必要なもの</dt><dd>Python 3.9.5以上, FFmpeg</dd>
+            <dt>最終更新日</dt><dd>2026-08-21T12:05:15+09:00</dd>
+          </dl>
+        </article></section></main>
+<footer>SQLiteから生成 / 最終更新日は各実行ファイルのファイル更新日時</footer>
+<script>const q=document.querySelector('#search'),cards=[...document.querySelectorAll('.card')],count=document.querySelector('#count');q.addEventListener('input',()=>{const s=q.value.trim().toLocaleLowerCase();let n=0;cards.forEach(c=>{const show=c.dataset.search.includes(s);c.classList.toggle('hidden',!show);if(show)n++});count.textContent=n+' 件'});</script>
+</body></html>

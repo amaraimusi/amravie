@@ -1,0 +1,7 @@
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\add.js
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\SaleBase.js
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\SugItemSearch.js
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\SugUnitRetail.js
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\IrisuUnitQuantity.js
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\Hosyo.js
+C:\Users\user\git\sakerui_hanbai\dev\public\js\Sale\MainSale.js

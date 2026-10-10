@@ -1,0 +1,103 @@
+﻿Pythonツール一覧
+========================================================================
+収録数: 11
+
+[1] ExtGather（拡張子別ファイル収集ツール）
+目的: 指定拡張子のファイルを下層フォルダまで探索し、1つの出力フォルダへ収集する。
+使用例: python ExtGather\ext_gather.py srt "E:\backup_kenji\mov" "E:\backup_kenji\mov\srt"
+説明: 同名ファイルを区別し、コピー元が新しい場合のみ更新。出力フォルダは探索から除外。README.mdにコピー元を記録し、--dry-runで事前確認できる。
+入口: ExtGather/ext_gather.py
+種別: コマンドライン
+依存: Python 3.9以上（標準ライブラリのみ）
+最終更新日: 2026-10-10T20:30:48+09:00
+------------------------------------------------------------------------
+[2] InstaThumbPad（サムネ余白メーカー）
+目的: 元サムネイルを原寸で背景の中央に重ね、横幅に余白のある画像を作る。
+使用例: python InstaThumbPad\insta_thumb_pad.py "InstaThumbPad\back1.png" "InstaThumbPad\サムネ45.png" 20
+説明: 余白率は左右合計の追加割合（％）。背景のみ縦横比を保って伸縮する。出力省略時は元画像名_instapad.png。既存ファイルは上書きしない。
+入口: InstaThumbPad/insta_thumb_pad.py
+種別: コマンドライン
+依存: Python 3.9以上, Pillow
+最終更新日: 2026-09-28T16:02:24+09:00
+------------------------------------------------------------------------
+[3] ClipJoiner（正規化済み動画連結）
+目的: 形式が揃った複数の MP4 を並べ替え、映像を再エンコードせず1本に連結する。
+使用例: python clip_joiner\clip_joiner.py "input_folder" "joined.mp4" --sort name --overwrite
+説明: 名前・更新日時・作成日時で並べ替え可能。形式の互換性を事前確認し、完成動画と同じベース名の SQLite とテキストレポートも作る。通常は音声もcopy、問題時は --audio-codec ac3。出力省略時は入力フォルダの親へフォルダ名.mp4を作る。
+入口: clip_joiner/clip_joiner.py
+種別: コマンドライン
+依存: Python 3, FFmpeg, ffprobe
+最終更新日: 2026-08-27T18:23:25+09:00
+------------------------------------------------------------------------
+[4] ClipNormalizer（動画クリップ正規化）
+目的: MP4素材を、後で安全に連結しやすい同一解像度・CFR・ゼロ開始PTSの形式へ変換する。
+使用例: python ClipNormalizer\clip_normalizer.py "input.mp4" "normalized.mp4" --fps 30 --width 1920 --height 1080
+説明: 既定は1920x1080、30fps、H.264/libx264、AAC 48kHz、CRF 18。縦横比を維持して黒帯で埋め、変換後にコーデック、寸法、FPS、開始時刻、音声を検証する。幅と高さは偶数が必要。
+入口: ClipNormalizer/clip_normalizer.py
+種別: コマンドライン
+依存: Python 3, FFmpeg, ffprobe
+最終更新日: 2026-08-22T13:44:17+09:00
+------------------------------------------------------------------------
+[5] ClipNormalizer Batch（動画クリップ一括正規化）
+目的: ディレクトリ内の MP4 をまとめて ClipNormalizer と同じ連結向け形式へ正規化する。
+使用例: python ClipNormalizer\clip_normalizer_batch.py "input_folder" "output_folder" --recursive --overwrite
+説明: 出力先省略時は入力フォルダ名_normalizedを作る。--recursive でサブフォルダも処理し、相対構造を維持する。既存出力は --overwrite がなければスキップし、各ファイルを検証後に確定する。
+入口: ClipNormalizer/clip_normalizer_batch.py
+種別: コマンドライン
+依存: Python 3, clip_normalizer.py, FFmpeg, ffprobe
+最終更新日: 2026-08-22T13:57:20+09:00
+------------------------------------------------------------------------
+[6] Directory List（ディレクトリ構造一覧）
+目的: 指定ディレクトリのフォルダ・ファイル構造をツリー形式で標準出力へ表示する。
+使用例: python dir_list.py "C:\Users\user\git\amravie\src" 3
+説明: 第2引数は表示する階層数で、省略時は2階層。名前順に表示し、アクセス拒否の場所はその旨を表示する。
+入口: dir_list.py
+種別: コマンドライン
+依存: Python 3（標準ライブラリのみ）
+最終更新日: 2025-03-19T11:48:06+09:00
+------------------------------------------------------------------------
+[7] File Rename（ファイル更新日付き一括リネーム）
+目的: 設定ファイルで指定したフォルダ内の各ファイル名の先頭に更新日を付け、一括変更する。
+使用例: file_rename.txt の target_dir を設定し、src で python file_rename.py
+説明: 更新日は yy_mmdd 形式。拡張子を問わずフォルダ直下の全項目を処理するため、実行前に対象フォルダを必ず確認すること。既に日付が付いた名前も再実行すると再度変更される。
+入口: file_rename.py
+種別: 設定ファイル型コマンドライン
+依存: Python 3, vendor.CrudBase.ConfigX, file_rename.txt
+最終更新日: 2023-06-12T15:41:01+09:00
+------------------------------------------------------------------------
+[8] Scene Timestamp（動画シーン時刻検出）
+目的: MP4 の画面色差からハードカットを検出し、各シーンの開始・終了・長さを CSV または JSON に出力する。
+使用例: python scene_timestamp.py "input.mp4" --format csv --threshold 0.12 --min-scene 3
+説明: 既定では0.2秒間隔で比較し、色差閾値0.12、最短シーン3秒。-o を省略すると入力名_scenes.csv/json を入力動画と同じ場所へ作る。検出が少ない場合は --threshold を下げる。
+入口: scene_timestamp.py
+種別: コマンドライン
+依存: Python 3, OpenCV (cv2), NumPy
+最終更新日: 2026-08-17T14:48:44+09:00
+------------------------------------------------------------------------
+[9] Time Lapse（音声付きタイムラプス生成）
+目的: 動画と音声を指定倍率で高速化し、H.264/AAC の MP4 として出力する。
+使用例: python 21_time_lapse.py "input.mp4" "output.mp4" 4
+説明: 出力先に空文字を指定した場合は入力名に _b を付ける。倍率が2以下なら音量を半分、2より大きい場合は atempo を2段にして音量を1/10にする。出力FPSは30。
+入口: 21_time_lapse.py
+種別: コマンドライン
+依存: Python 3, ffmpeg-python, FFmpeg
+最終更新日: 2025-04-17T20:28:14+09:00
+------------------------------------------------------------------------
+[10] Time Lapse Ex（無音タイムラプス生成）
+目的: 動画を指定倍率で高速化し、元音声を除去して動画長に合う無音音声を付ける。
+使用例: python 22_time_lapse_ex.py "input.mp4" "output.mp4" 8
+説明: 作業ディレクトリに一時ファイル temp_time_lapse.mp4、temp_video.mp4、silent_temp.mp3 を作成し、終了時に削除する。出力FPSは30。
+入口: 22_time_lapse_ex.py
+種別: コマンドライン
+依存: Python 3, ffmpeg-python, pydub, FFmpeg
+最終更新日: 2025-01-14T00:09:32+09:00
+------------------------------------------------------------------------
+[11] Video Scene Cutter（動画シーン切り出し）
+目的: MP4 から開始・終了タイムスタンプで指定した範囲を映像・音声付きで切り出す。
+使用例: python video_scene_cutter\video_scene_cutter.py "input.mp4" "00:03:41,338" "00:03:47,300" -o "scene.mp4"
+説明: 時刻形式は HH:MM:SS,mmm（小数点も可）。出力省略時は入力動画と同じ場所に自動命名する。H.264 CRF 18/AAC 192kbpsで再エンコードし、既存ファイルの上書きには --overwrite が必要。
+入口: video_scene_cutter/video_scene_cutter.py
+種別: コマンドライン
+依存: Python 3.9.5以上, FFmpeg
+最終更新日: 2026-08-21T12:05:15+09:00
+------------------------------------------------------------------------
