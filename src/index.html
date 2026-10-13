@@ -14,7 +14,16 @@ h2{margin:0;font-size:1.35rem} .ja{margin:0;color:var(--accent);font-weight:700}
 .hidden{display:none} footer{text-align:center;color:var(--muted);padding:0 20px 35px;font-size:.85rem} @media(max-width:520px){.grid{grid-template-columns:1fr}.card-head{display:block}.kind{display:inline-block;margin-top:8px}}
 </style></head><body>
 <header><div class="eyebrow">AMRAVIE / TOOL CATALOG</div><h1>Pythonツール一覧</h1><p>src 配下にある実行可能な Python ツールの目的、使い方、注意点をまとめた一覧です。データの正本は python_tools.sqlite です。</p></header>
-<main><div class="toolbar"><input id="search" type="search" placeholder="名前、目的、ファイル名などで検索…" autofocus><span id="count">11 件</span></div><section class="grid">
+<main><div class="toolbar"><input id="search" type="search" placeholder="名前、目的、ファイル名などで検索…" autofocus><span id="count">12 件</span></div><section class="grid">
+        <article class="card" data-search="naskeeper NASバックアップ管理ツール NAS 差分 バックアップ 中断 再開">
+          <div class="card-head"><div><h2>NasKeeper</h2><p class="ja">NASバックアップ管理ツール</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">Windows PCからNASへ安全にバックアップ。差分転送、途中再開、検証、エラー時の続行に対応。</p>
+          <p><a href="NasKeeper/使い方.html">使い方（HTML）</a></p>
+          <dl><dt>使用例</dt><dd><code>python NasKeeper&#92;naskeeper.py &quot;保存元&quot; &quot;&#92;&#92;NAS&#92;共有&#92;保存先&quot;</code></dd>
+          <dt>その他説明</dt><dd>既定でSHA-256検証・旧版保存。元データを変更せず、不明な既存ファイルは保留。無人実行とログ・結果表示に対応。</dd>
+          <dt>実行ファイル</dt><dd><code>NasKeeper/naskeeper.py</code></dd><dt>必要なもの</dt><dd>Python 3.9以上（標準ライブラリのみ）</dd>
+          <dt>最終更新日</dt><dd>2026-10-13</dd></dl>
+        </article>
         <article class="card" data-search="1 extgather 拡張子別ファイル収集ツール 指定拡張子のファイルを下層フォルダまで探索し、1つの出力フォルダへ収集する。 python extgather\ext_gather.py srt &quot;e:\backup_kenji\mov&quot; &quot;e:\backup_kenji\mov\srt&quot; 同名ファイルを区別し、コピー元が新しい場合のみ更新。出力フォルダは探索から除外。readme.mdにコピー元を記録し、--dry-runで事前確認できる。 extgather/ext_gather.py コマンドライン python 3.9以上（標準ライブラリのみ） 2026-10-10t20:30:48+09:00">
           <div class="card-head"><div><h2>ExtGather</h2><p class="ja">拡張子別ファイル収集ツール</p></div><span class="kind">コマンドライン</span></div>
           <p class="purpose">指定拡張子のファイルを下層フォルダまで探索し、1つの出力フォルダへ収集する。</p>
