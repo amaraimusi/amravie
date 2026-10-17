@@ -1,0 +1,6 @@
+work/*
+!work/.gitkeep
+.venv/
+__pycache__/
+*.pyc
+tts/*/*.safetensors

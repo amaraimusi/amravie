@@ -1,0 +1,9 @@
+# Python 3.9 / Windows x64; CPU supported
+style-bert-vits2==2.5.0
+numpy==1.26.4
+scipy==1.13.1
+soundfile==0.12.1
+torch==2.3.1
+transformers==4.41.2
+sentencepiece==0.2.0
+protobuf==4.25.3

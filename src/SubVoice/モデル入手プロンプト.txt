@@ -1,0 +1,25 @@
+
+
+
+
+
+
+以下のディレクトリに音声モデルを何種類かダウンロードしてください。商用利用可能なデータが良いです。
+C:\Users\user\git\amravie\src\SubVoice\tts
+
+また、SubVoiceツールでモデルを使用する例を作成してください。(下記の音声モデルの説明ファイルに使い方も記載)
+
+------- ツール名：
+ツールの場所 SubVoice　字幕読み上げツール
+C:/Users/user/git/amravie/src/SubVoice
+
+------- 作業用ディレクトリのパス
+C:/Users/user/git/amravie/src/SubVoice/work
+
+
+------- 音声モデルの説明について
+音声モデルの一覧をhtmlで作成し、ttsフォルダ内に配置してください。クレジット表記についても記載してください。
+
+------- 目次への追加
+目次へ、モデルの説明(html)へのリンクを追加してください。先頭の項に挿入してほしいです。
+C:/Users/user/git/amravie/src/index.html

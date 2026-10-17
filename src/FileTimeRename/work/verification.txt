@@ -1,0 +1,9 @@
+Runtime: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)]
+Python 3.9 syntax: OK
+Provided directory dry-run: 46 files, no changes
+Copied video: E:\backup_kenji\mov\n175\100ANDRO\26_0921_26_0921_MOV_0385.mp4
+Renamed video: src\FileTimeRename\work\real_video_check\20260921_223412_26_0921_26_0921_MOV_0385.mp4
+SHA-256: c68eee4e324fa766f0585e9c1ba4e189586084058b71544cbb2556350d98acd1
+Content and mtime preserved: OK
+Repeat run: skipped
+Catalog first link: OK

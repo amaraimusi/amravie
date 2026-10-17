@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FileTimeRename｜ファイル日時付与ツール 使い方</title>
+<style>
+body{margin:0;background:#f4f1e9;color:#18212b;font-family:"Yu Gothic UI",sans-serif;line-height:1.85}
+header{padding:38px max(5vw,24px);background:#176b67;color:#fff}h1{margin:0}header p{margin:8px 0}
+main{max-width:900px;margin:28px auto;padding:0 24px 48px}section{background:#fffdf8;border:1px solid #d9d4c8;border-radius:12px;padding:20px 26px;margin:20px 0}
+h2{color:#176b67}pre{background:#edf0ef;padding:16px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}code{overflow-wrap:anywhere}a{color:#176b67}table{border-collapse:collapse;width:100%}th,td{border:1px solid #d9d4c8;padding:10px;text-align:left}
+</style>
+</head>
+<body>
+<header><h1>FileTimeRename</h1><p>ファイル日時付与ツール · Python 3.9以上</p></header>
+<main>
+<p><a href="../index.html">← ツール一覧</a></p>
+<nav>目次：<a href="#overview">概要</a> ／ <a href="#usage">実行方法</a> ／ <a href="#options">引数</a> ／ <a href="#behavior">動作と注意点</a></nav>
+<section id="overview"><h2>概要</h2>
+<p>指定フォルダ内のすべての通常ファイルに、ファイルの<strong>更新日時</strong>を付与します。動画以外や拡張子のないファイル、隠しファイルも対象です。作成日時・動画内部の撮影メタデータは使いません。外部ライブラリは不要です。</p>
+<pre>MOV_0123.mp4
+↓ 更新日時が2026年10月15日 09時30分25秒の場合
+20261015_093025_MOV_0123.mp4</pre>
+<p>名前に日時が残るので、後日編集して更新日時が変わっても、付与済みの名前は維持できます。すでに更新日時が撮影日時から変わっている場合、元の撮影日時を復元する機能はありません。</p></section>
+<section id="usage"><h2>実行方法</h2>
+<p>WindowsのPowerShellなどで実行します。パスに空白があっても使えるよう、引用符で囲んでください。</p>
+<p>1. 変更予定を確認する（任意）</p>
+<pre>python "C:\Users\user\git\amravie\src\FileTimeRename\file_time_rename.py" "E:\backup_kenji\mov\n175\100ANDRO" --dry-run</pre>
+<p>2. ファイル名を変更する</p>
+<pre>python "C:\Users\user\git\amravie\src\FileTimeRename\file_time_rename.py" "E:\backup_kenji\mov\n175\100ANDRO"</pre>
+<p>サブフォルダ内も処理する場合は末尾に <code>--recursive</code> を付けます。</p>
+<pre>python file_time_rename.py "D:\動画フォルダ" --recursive --dry-run
+python file_time_rename.py --help</pre></section>
+<section id="options"><h2>引数・オプション</h2>
+<table><thead><tr><th>指定</th><th>内容</th></tr></thead><tbody>
+<tr><td>directory（必須）</td><td>対象フォルダ。通常は直下だけを処理します。</td></tr>
+<tr><td>-r / --recursive</td><td>すべてのサブフォルダ内も処理します。フォルダ名は変更しません。</td></tr>
+<tr><td>--dry-run</td><td>変更予定とエラーを表示するだけで、ファイルを変更しません。</td></tr>
+<tr><td>-h / --help</td><td>ヘルプを表示します。</td></tr></tbody></table></section>
+<section id="behavior"><h2>動作と注意点</h2>
+<ul>
+<li>バックアップは作成しません。ファイル内容は書き換えず、更新日時も維持します。</li>
+<li>日時は実行環境のローカル時刻です。日本時間で付与する場合は、PCのタイムゾーンを日本に設定してください。秒未満は名前に含めません。</li>
+<li>先頭に有効な <code>YYYYMMDD_HHMMSS_</code> があるファイルは、更新日時と異なっていてもスキップします。従来の <code>26_0913_</code> などの接頭辞は残して、新しい日時を先頭に付けます。</li>
+<li>変更先と同名のファイル・フォルダがあれば上書きせず、そのファイルをエラーとして報告し、残りを処理します。長すぎる名前や権限不足なども同様です。</li>
+<li>シンボリックリンクやジャンクションは処理・追跡しません。対象のルートフォルダにも実体のパスを指定してください。</li>
+<li>実行中は対象ファイルの編集・移動などを避けてください。途中でエラーや中断があっても、完了した名前変更は元に戻しません。再実行すると日時付きのファイルをスキップします。</li>
+<li>最後に変更（事前確認では変更予定）・スキップ・エラーの件数を表示します。終了コードは成功が0、一部失敗が1、引数の誤りが2、中断が130です。</li>
+</ul></section>
+</main></body></html>

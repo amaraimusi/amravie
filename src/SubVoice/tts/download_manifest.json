@@ -1,0 +1,85 @@
+{
+  "repository": "litagin/style_bert_vits2_jvnv",
+  "revision": "205830ca1d49e666ddfbf2a755f0108e9cade4dd",
+  "retrieved_date": "2026-10-17",
+  "files": [
+    {
+      "path": "JVNV_MODEL_CARD.md",
+      "size": 832,
+      "sha256": "ec0d5d05c21c62d313d812bd7c2660b54cc6335259679f36834131bd9abbbe3c",
+      "upstream_lfs_sha256": null
+    },
+    {
+      "path": "jvnv-F1-jp/config.json",
+      "size": 2141,
+      "sha256": "d310da5c1e9b095a833591b4bc07209631d6edece263da88e597aaf7f9984d3d",
+      "upstream_lfs_sha256": null
+    },
+    {
+      "path": "jvnv-F1-jp/jvnv-F1-jp_e160_s14000.safetensors",
+      "size": 251150980,
+      "sha256": "a90fa6c9444d9235c9ec4db99daf7c5c6a21cc26ca141b4c48455d66a3257d01",
+      "upstream_lfs_sha256": "a90fa6c9444d9235c9ec4db99daf7c5c6a21cc26ca141b4c48455d66a3257d01"
+    },
+    {
+      "path": "jvnv-F1-jp/style_vectors.npy",
+      "size": 7296,
+      "sha256": "1f959bb45ed0922efc31ff24e9147253814f42cb1d2d1e2bb10391a9df368489",
+      "upstream_lfs_sha256": "1f959bb45ed0922efc31ff24e9147253814f42cb1d2d1e2bb10391a9df368489"
+    },
+    {
+      "path": "jvnv-F2-jp/config.json",
+      "size": 2216,
+      "sha256": "b8aff1fcd9a17a744ce4b9e3e8dc066f2d7d8deb16e0adb09edbdeb569777286",
+      "upstream_lfs_sha256": null
+    },
+    {
+      "path": "jvnv-F2-jp/jvnv-F2_e166_s20000.safetensors",
+      "size": 251150980,
+      "sha256": "f6289a6f30bb9795744815b9da764a3c8198b18652d9fddef82fff1e14f0e784",
+      "upstream_lfs_sha256": "f6289a6f30bb9795744815b9da764a3c8198b18652d9fddef82fff1e14f0e784"
+    },
+    {
+      "path": "jvnv-F2-jp/style_vectors.npy",
+      "size": 7296,
+      "sha256": "900f8cde3a336d12193fec7b7d8e6c5dc77b3a5d719a9be3f8598389cd88e643",
+      "upstream_lfs_sha256": "900f8cde3a336d12193fec7b7d8e6c5dc77b3a5d719a9be3f8598389cd88e643"
+    },
+    {
+      "path": "jvnv-M1-jp/config.json",
+      "size": 2141,
+      "sha256": "1a66da636d8a9f0eed4120c59cb1bf1077b819731cf2c960d799e87d383bc76c",
+      "upstream_lfs_sha256": null
+    },
+    {
+      "path": "jvnv-M1-jp/jvnv-M1-jp_e158_s14000.safetensors",
+      "size": 251150980,
+      "sha256": "0d86765f1fe08dbba74cd06283e96b6941b3f232329fabbba9c30e6edc27887a",
+      "upstream_lfs_sha256": "0d86765f1fe08dbba74cd06283e96b6941b3f232329fabbba9c30e6edc27887a"
+    },
+    {
+      "path": "jvnv-M1-jp/style_vectors.npy",
+      "size": 7296,
+      "sha256": "7a925435e8c1c9efc8fc8e90e690655ab9a7bae00a790892e13e936510d04f05",
+      "upstream_lfs_sha256": "7a925435e8c1c9efc8fc8e90e690655ab9a7bae00a790892e13e936510d04f05"
+    },
+    {
+      "path": "jvnv-M2-jp/config.json",
+      "size": 2141,
+      "sha256": "6c14c32c69e92728ec29c5a8cda8d4938fd59c5d035896c8c4ff836887795835",
+      "upstream_lfs_sha256": null
+    },
+    {
+      "path": "jvnv-M2-jp/jvnv-M2-jp_e159_s17000.safetensors",
+      "size": 251150980,
+      "sha256": "8245f39438076d36a3befd8aefb15c38830cef326c1f7c9d9c8e64b647645402",
+      "upstream_lfs_sha256": "8245f39438076d36a3befd8aefb15c38830cef326c1f7c9d9c8e64b647645402"
+    },
+    {
+      "path": "jvnv-M2-jp/style_vectors.npy",
+      "size": 7296,
+      "sha256": "c965bb63fa4a759d41a8a4a3649333125d6497ae8a705d81b7d5c5bd2854797c",
+      "upstream_lfs_sha256": "c965bb63fa4a759d41a8a4a3649333125d6497ae8a705d81b7d5c5bd2854797c"
+    }
+  ]
+}

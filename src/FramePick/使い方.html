@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FramePick — 動画フレーム抽出ツールの使い方</title>
+<style>body{margin:0;background:#f4f1e9;color:#18212b;font-family:"Yu Gothic UI",sans-serif;line-height:1.8}header{background:#176b67;color:white;padding:36px max(5vw,24px)}main{max-width:960px;margin:32px auto;padding:0 24px 48px}h1{margin:0}h2{margin-top:36px;color:#176b67}pre{background:#18212b;color:#fff;padding:18px;border-radius:10px;overflow-x:auto}code{overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;background:white}th,td{border:1px solid #d9d4c8;padding:10px;text-align:left}a{color:#176b67}.note{padding:16px;background:#fff;border-left:4px solid #176b67}</style>
+</head><body><header><h1>FramePick</h1><p>動画フレーム抽出ツール / Python 3.9対応</p></header><main>
+<p><a href="../index.html">← ツール一覧へ</a></p>
+<p>MP4から一定間隔で画像を取り出し、元動画のパスと実際のフレーム時刻をテキストに記録します。AIに画像の説明を依頼し、その結果を字幕データに結び付けるための素材を作ります。</p>
+<nav><a href="#setup">準備</a> · <a href="#examples">実行例</a> · <a href="#options">引数</a> · <a href="#output">出力・時刻の意味</a> · <a href="#errors">困ったとき</a></nav>
+<h2 id="setup">1. 準備</h2>
+<p>Python 3.9以上とFFmpegが必要です。追加のPythonパッケージは不要です。FFmpegのbinフォルダをPATHに追加するか、<code>--ffmpeg</code>で実行ファイルを指定してください。</p>
+<p>PowerShellで以下のフォルダに移動します。</p>
+<pre>cd C:\Users\user\git\amravie\src\FramePick
+python --version
+ffmpeg -version</pre>
+<h2 id="examples">2. 実行例</h2>
+<p>5秒ごとに、動画の終端まで抽出します。</p>
+<pre>python frame_pick.py "E:\backup_kenji\mov\n175\100ANDRO_normalized\105_26_1003_MOV_0413.mp4"</pre>
+<p>出力先を省略すると、動画と同じ場所に <code>105_26_1003_MOV_0413_frames</code> フォルダを作ります。</p>
+<p>出力先を指定し、5秒間隔で最大3枚、幅640pxに縮小します。</p>
+<pre>python frame_pick.py "E:\backup_kenji\mov\n175\100ANDRO_normalized\105_26_1003_MOV_0413.mp4" "work\sample" --interval 5 --count 3 --max-width 640</pre>
+<p>12.5秒の位置から1枚だけPNGで取得します。小数秒を指定でき、12.5秒は12500ミリ秒です。</p>
+<pre>python frame_pick.py "movie.mp4" "work\one" --start 12.5 --count 1 --format png</pre>
+<p>10秒から30秒未満まで、2.5秒おきに抽出します。</p>
+<pre>python frame_pick.py "movie.mp4" "work\range" --start 10 --end 30 --interval 2.5</pre>
+<h2 id="options">3. 引数・オプション</h2>
+<table><thead><tr><th>引数</th><th>意味</th><th>既定値</th></tr></thead><tbody>
+<tr><td>video</td><td>入力動画のパス（必須）</td><td>—</td></tr>
+<tr><td>output</td><td>第2引数。出力フォルダ</td><td>動画と同じ場所の「動画名_frames」</td></tr>
+<tr><td>--interval 秒</td><td>0より大きい抽出間隔</td><td>5</td></tr>
+<tr><td>--count 枚数</td><td>1以上の最大枚数</td><td>動画終端まで</td></tr>
+<tr><td>--start 秒</td><td>0以上の抽出開始位置</td><td>0</td></tr>
+<tr><td>--end 秒</td><td>終了位置（この時刻を含まない）。開始より後を指定</td><td>動画終端</td></tr>
+<tr><td>--format jpg|png</td><td>画像形式</td><td>jpg</td></tr>
+<tr><td>--max-width px</td><td>最大幅。拡大せず、縦横比を維持</td><td>元の解像度</td></tr>
+<tr><td>--ffmpeg パス</td><td>FFmpeg実行ファイル</td><td>ffmpeg</td></tr>
+<tr><td>-h / --help</td><td>ヘルプ表示</td><td>—</td></tr>
+</tbody></table>
+<h2 id="output">4. 出力と時刻の意味</h2>
+<ul><li><code>frame_000001.jpg</code> など：抽出順の画像（PNG指定時は.png）。</li>
+<li><code>frames.txt</code>：UTF-8 BOM付きテキスト。概要とタブ区切りの一覧です。</li>
+<li><code>ffmpeg.log</code>：処理ログ。問題の調査にも利用できます。</li></ul>
+<p>一覧の <code>image</code> は画像ファイル名、<code>source_video</code> は元動画の絶対パス、<code>requested_ms</code> は指定した抽出位置、<code>actual_ms</code> は実際に取得したフレームの時刻（ミリ秒、小数3桁）です。</p>
+<p class="note">時刻の原点は最初の映像フレームです。各指定時刻以降の最初のフレームを選ぶため、フレームの境界によって指定値と実取得時刻がずれます。可変フレームレートでも実際の表示時刻を記録します。字幕との対応付けには actual_ms を使ってください。音声と映像に開始のずれがある素材では別途調整が必要です。</p>
+<p>間隔が1フレームより短くても、同じフレームを重複出力しません。取得枚数は最大枚数であり、動画が短い場合は少なくなります。終了位置を動画長より後に指定した場合も、動画終端で終了します。回転情報のある映像にはFFmpegの自動回転が適用されます。</p>
+<p>AIには画像と対応する一覧を渡し、説明文と actual_ms を結び付けます。本ツール自体は説明文やSRTを生成しません。一定間隔のサンプルなので、短いシーンを拾いたい場合は間隔を小さくしてください。</p>
+<h2 id="errors">5. 困ったとき</h2>
+<ul><li>既存データの混在を防ぐため、出力先は新規または空のフォルダに限定しています。再実行時は別のフォルダ名を指定してください。</li>
+<li>抽出位置が動画の終端以降、映像がない、動画が破損している場合はエラーになります。frames.txtとffmpeg.logを確認してください。</li>
+<li>失敗・中断時は部分的な画像やログが残る場合があります。完了表示のない出力は完成した一覧として扱わないでください。</li>
+<li>パスに空白がある場合も含め、パスはダブルクォートで囲むと確実です。</li>
+<li>長い動画は先頭から順に読み取るため時間がかかります。枚数や終了位置、最大幅を指定すると処理量・出力量を抑えられます。</li></ul>
+<p>終了コード：成功 0 / 入力・処理エラー 1 / 引数の書式エラー 2 / 中断 130。</p>
+</main></body></html>

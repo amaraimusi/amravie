@@ -1,0 +1,46 @@
+{
+  "jvnv_f1": {
+    "name": "jvnv-F1-jp / 女性話者1",
+    "path": "tts/jvnv-F1-jp",
+    "source": "https://huggingface.co/litagin/style_bert_vits2_jvnv",
+    "license": "CC BY-SA 4.0",
+    "credit": "音声合成: Style-Bert-VITS2 / 音声モデル: jvnv-F1-jp (litagin)\nモデル配布元: https://huggingface.co/litagin/style_bert_vits2_jvnv\n学習元: JVNV corpus — Detai Xin, Junfeng Jiang, Shinnosuke Takamichi, Yuki Saito, Akiko Aizawa, Hiroshi Saruwatari\n学習元配布元: https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus\nLicense: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)\n配布モデルの重み・設定の改変なし。SubVoiceで音声を生成。\n日本語BERT: ku-nlp/deberta-v2-large-japanese-char-wwm (Language Media Processing Lab at Kyoto University), CC BY-SA 4.0\nhttps://huggingface.co/ku-nlp/deberta-v2-large-japanese-char-wwm",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "corpus_source": "https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus",
+    "commercial_use": "Allowed under CC BY-SA 4.0 conditions",
+    "verified_date": "2026-10-17"
+  },
+  "jvnv_f2": {
+    "name": "jvnv-F2-jp / 女性話者2",
+    "path": "tts/jvnv-F2-jp",
+    "source": "https://huggingface.co/litagin/style_bert_vits2_jvnv",
+    "license": "CC BY-SA 4.0",
+    "credit": "音声合成: Style-Bert-VITS2 / 音声モデル: jvnv-F2-jp (litagin)\nモデル配布元: https://huggingface.co/litagin/style_bert_vits2_jvnv\n学習元: JVNV corpus — Detai Xin, Junfeng Jiang, Shinnosuke Takamichi, Yuki Saito, Akiko Aizawa, Hiroshi Saruwatari\n学習元配布元: https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus\nLicense: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)\n配布モデルの重み・設定の改変なし。SubVoiceで音声を生成。\n日本語BERT: ku-nlp/deberta-v2-large-japanese-char-wwm (Language Media Processing Lab at Kyoto University), CC BY-SA 4.0\nhttps://huggingface.co/ku-nlp/deberta-v2-large-japanese-char-wwm",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "corpus_source": "https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus",
+    "commercial_use": "Allowed under CC BY-SA 4.0 conditions",
+    "verified_date": "2026-10-17"
+  },
+  "jvnv_m1": {
+    "name": "jvnv-M1-jp / 男性話者1",
+    "path": "tts/jvnv-M1-jp",
+    "source": "https://huggingface.co/litagin/style_bert_vits2_jvnv",
+    "license": "CC BY-SA 4.0",
+    "credit": "音声合成: Style-Bert-VITS2 / 音声モデル: jvnv-M1-jp (litagin)\nモデル配布元: https://huggingface.co/litagin/style_bert_vits2_jvnv\n学習元: JVNV corpus — Detai Xin, Junfeng Jiang, Shinnosuke Takamichi, Yuki Saito, Akiko Aizawa, Hiroshi Saruwatari\n学習元配布元: https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus\nLicense: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)\n配布モデルの重み・設定の改変なし。SubVoiceで音声を生成。\n日本語BERT: ku-nlp/deberta-v2-large-japanese-char-wwm (Language Media Processing Lab at Kyoto University), CC BY-SA 4.0\nhttps://huggingface.co/ku-nlp/deberta-v2-large-japanese-char-wwm",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "corpus_source": "https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus",
+    "commercial_use": "Allowed under CC BY-SA 4.0 conditions",
+    "verified_date": "2026-10-17"
+  },
+  "jvnv_m2": {
+    "name": "jvnv-M2-jp / 男性話者2",
+    "path": "tts/jvnv-M2-jp",
+    "source": "https://huggingface.co/litagin/style_bert_vits2_jvnv",
+    "license": "CC BY-SA 4.0",
+    "credit": "音声合成: Style-Bert-VITS2 / 音声モデル: jvnv-M2-jp (litagin)\nモデル配布元: https://huggingface.co/litagin/style_bert_vits2_jvnv\n学習元: JVNV corpus — Detai Xin, Junfeng Jiang, Shinnosuke Takamichi, Yuki Saito, Akiko Aizawa, Hiroshi Saruwatari\n学習元配布元: https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus\nLicense: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)\n配布モデルの重み・設定の改変なし。SubVoiceで音声を生成。\n日本語BERT: ku-nlp/deberta-v2-large-japanese-char-wwm (Language Media Processing Lab at Kyoto University), CC BY-SA 4.0\nhttps://huggingface.co/ku-nlp/deberta-v2-large-japanese-char-wwm",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "corpus_source": "https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus",
+    "commercial_use": "Allowed under CC BY-SA 4.0 conditions",
+    "verified_date": "2026-10-17"
+  }
+}

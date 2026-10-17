@@ -1,0 +1,5 @@
+2026-10-17 22:20:36,401 INFO SRT解析: 1件 / 開始 0.500秒 / 最終開始 0.500秒
+2026-10-17 22:21:37,390 WARNING Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-10-17 22:30:13,644 INFO SRT解析: 1件 / 開始 0.500秒 / 最終開始 0.500秒
+2026-10-17 22:30:27,845 INFO [1/1] 字幕 #1 生成中...
+2026-10-17 22:30:49,829 INFO 完了: C:\Users\user\git\amravie\src\SubVoice\tts\examples\output\jvnv_f1\demo_subvoice.wav / 成功 1件 / 失敗 0件
