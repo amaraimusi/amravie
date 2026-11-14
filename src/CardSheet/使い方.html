@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CardSheet — 印刷シート画像作成ツールの使い方</title>
+<style>body{max-width:960px;margin:40px auto;padding:0 24px;font-family:"Yu Gothic UI",sans-serif;line-height:1.8;color:#21343b;background:#faf9f5}h1,h2{color:#176b67}pre{padding:18px;background:#eaece8;overflow:auto}table{border-collapse:collapse;width:100%}td,th{padding:10px;border:1px solid #ccd5cf;text-align:left}a{color:#176b67}</style>
+<a href="../index.html">← ツール一覧</a>
+<h1>CardSheet</h1><p>印刷シート画像作成ツール / Python 3.9</p>
+<p>カードイラストを指定順に並べ、印刷用のPNG・JPEG画像を1枚作成します。標準は63 × 88mmのカードを2L判（127 × 178mm）へ2列 × 2行で配置します。</p>
+<h2>準備</h2><p>このフォルダで次を実行します。</p><pre>python -m pip install -r requirements.txt</pre>
+<h2>基本の使い方</h2><p>ファイルパスは空白や日本語を含む場合も、二重引用符で囲んでください。</p>
+<pre>python card_sheet.py "カード1.png" "カード2.png" "カード3.png" "カード4.png"</pre>
+<p>出力先を省略すると、1枚目と同じフォルダに「元ファイル名_cardsheet.png」を保存します。既存ファイルは上書きしません。</p>
+<h2>指定された見本カードでの実行例</h2>
+<pre>python card_sheet.py "C:/Users/user/git/cgwork/work/CardMaking/見本カード/ガガンボマン.png" "C:/Users/user/git/cgwork/work/CardMaking/見本カード/勤勉なネコ.png" "C:/Users/user/git/cgwork/work/CardMaking/見本カード/猫貴族　藤原雪丸.png" "C:/Users/user/git/cgwork/work/CardMaking/見本カード/野生の料理人ゴリラ.png" -o "work/見本シート.png"</pre>
+<p>出力先のフォルダは事前に作成してください。</p>
+<h2>オプション</h2><table><tr><th>指定</th><th>内容</th></tr>
+<tr><td>--card-size 63 88</td><td>カードの幅・高さ（mm）。既定63 × 88。</td></tr>
+<tr><td>--sheet-size 127 178</td><td>用紙の幅・高さ（mm）。既定2L判。任意の用紙サイズも指定できます。</td></tr>
+<tr><td>--format png / jpeg</td><td>既定PNG。jpgも指定可。出力パスがある場合は拡張子から判定します。両方指定するときは一致させてください。</td></tr>
+<tr><td>-o / --output</td><td>出力ファイルのパス。</td></tr><tr><td>--help</td><td>引数の一覧を表示。</td></tr></table>
+<pre>python card_sheet.py "カード1.png" "カード2.png" "カード3.png" --format jpeg
+python card_sheet.py "カード1.png" --card-size 60 85 --sheet-size 127 178 -o "work/custom.jpg"</pre>
+<h2>配置と画像サイズの決め方</h2>
+<p>左上→右上→次の行の順に配置します。用紙に入る列数・行数は実寸から計算します。3枚なら最後の枠は白地、標準設定で5枚以上なら5枚目以降を読み込まず無視します。カードの回転や複数シートへの分割はしません。</p>
+<p>1枚目の画像幅 ÷ カード幅mmを基準のpx/mmとし、用紙幅・高さに掛けて四捨五入します。例えば1枚目の幅が630pxなら、シートは1270 × 1780px、カードは630 × 880pxです。1枚目の高さは基準にせず、全カードを指定実寸の縦横比へ伸縮します。切り抜きはしません。EXIFの向きを反映した画像幅を使用します。</p>
+<p>カード間の隙間はなく、配置枠全体を用紙の中央へ置きます。標準設定の余白は左右約0.5mm・上下約1mmです。透明部分と未使用枠は白色です。端数丸めにより最大約1pxの差が生じます。印刷用の解像度情報（DPI）も保存します。</p>
+<h2>実寸で印刷するには</h2>
+<p>印刷時は用紙を2L判に設定し、「実際のサイズ」「100%」を使用してください。「用紙に合わせる」「フチなし拡大」等はカード実寸を変えることがあります。プリンターの印刷不可領域で端が欠ける場合があります。まず試し刷りして定規で確認してください。裁断線・塗り足しは付けません。</p>
+<h2>エラーについて</h2><p>入力画像の破損、出力フォルダが存在しない、出力済みファイルの重複、カードが1枚も入らない用紙サイズ等はエラーになります。正の有限なmm値が必要です。出力は8000万画素までです。入力画像は変更しません。</p>
+</html>

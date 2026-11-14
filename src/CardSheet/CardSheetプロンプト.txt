@@ -1,0 +1,84 @@
+
+以下のツールを開発してください。
+
+-----------------プロンプト
+
+	
+ツール名：CardSheet
+和名：印刷シート画像作成ツール
+
+------- 要件
+
+
+	４枚のカードイラストを並べてシート画像を作成する。
+	
+	シート画像の縦横サイズ(px)は１つめのカードイラストの縦横サイズから算出。
+	カードイラストの幅(px)に合わせてシート画像の幅も変化する感じだ。
+	
+	引数のリアルカードサイズの関係上、カードイラストも微妙に伸縮させる必要も出てくる。
+	カードイラストの縦横を微妙に伸縮させてシート画像に並べてよい。
+
+
+
+------- 目的
+
+	オリジナルカードの作成をしたい。そのための印刷シート画像を作成する。
+
+------- 引数
+
+	カードのサイズ 63 × 88mm
+	カードリスト：
+		カードイラストのファイルパスのリスト
+			(例）
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/ガガンボマン.png
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/勤勉なネコ.png
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/猫貴族　藤原雪丸.png
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/野生の料理人ゴリラ.png
+		４枚が基本だが、３毎とか５枚でも指定可能。シート画像に入らないカードイラストは無視
+		
+	オプション
+
+		2L判（デフォルト）
+		- 横：127mm
+		- 縦：178mm
+		
+		拡張性 png（デフォルト）,jpeg
+
+------- 出力先
+
+出力先が未設定なら入力ファイル（１つ目のカードイラストのファイルパス）と同じフォルダに出力する。
+
+
+------- 開発言語
+python3.9
+
+------- ツールの作成場所
+
+C:/Users/user/git/amravie/src/CardSheet
+
+------- 作業用ディレクトリのパス
+C:/Users/user/git/amravie/src/CardSheet/work
+
+
+------- ヘルプ（使い方）ファイルについて
+「使い方」をhtmlで作成し、ツールと同じフォルダに配置してください。
+
+------- 使い方の目次への追加
+目次へ、使い方(html)へのリンクを追加してください。先頭の項に挿入してほしいです。
+C:/Users/user/git/amravie/src/index.html
+
+
+------- テスト用データ
+
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/ガガンボマン.png
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/勤勉なネコ.png
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/猫貴族　藤原雪丸.png
+			C:/Users/user/git/cgwork/work/CardMaking/見本カード/野生の料理人ゴリラ.png
+
+
+
+
+
+
+
+
