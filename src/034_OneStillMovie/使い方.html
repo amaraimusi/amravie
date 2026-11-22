@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OneStillMovieの使い方</title>
+  <style>
+    body { max-width: 52rem; margin: 2rem auto; padding: 0 1rem; color: #18212b; background: #f4f1e9; font: 1rem/1.7 "Yu Gothic UI", sans-serif; }
+    h1, h2, a { color: #165653; }
+    pre { padding: 0.8rem; background: #fffdf8; border: 1px solid #d9d4c8; border-radius: 0.5rem; overflow: auto; }
+  </style>
+</head>
+<body>
+  <p><a href="../index.html">Pythonツール一覧へ戻る</a></p>
+  <h1>034 OneStillMovie</h1>
+  <p><strong>1枚静止画ムービー生成ツール</strong></p>
+  <p>MP3の曲が流れている間、1枚のイラストを表示するMP4を作ります。</p>
+  <h2>準備</h2>
+  <p>Python 3.9とFFmpeg（libx264対応版）が必要です。コマンドラインで <code>ffmpeg -version</code> が実行できるように、FFmpegをPATHに追加してください。</p>
+  <h2>実行方法</h2>
+  <p>このHTMLと同じフォルダでコマンドを実行します。MP3、画像、出力先の順に指定します。パスは引用符で囲めます。</p>
+  <pre><code>python one_still_movie.py "TestData/ガガンボマンv4.mp3" "TestData/02_街の住人.png"</code></pre>
+  <p>出力先を省略すると、上の例では <code>TestData/ガガンボマンv4.mp4</code> ができます。</p>
+  <pre><code>python one_still_movie.py "TestData/ガガンボマンv4.mp3" "TestData/02_街の住人.png" "work/試作.mp4"</code></pre>
+  <p>出力先を指定する場合は、既存のフォルダと拡張子 <code>.mp4</code> のファイル名を指定します。出力先に同名ファイルがある場合はエラーになります。</p>
+  <h2>動画の仕様</h2>
+  <p>映像はH.264、音声はAACです。PNGやJPEGの静止画を使用でき、元の画像サイズで出力します。幅や高さが奇数の場合、その辺に1ピクセルの余白を加えます。</p>
+  <p><code>python one_still_movie.py --help</code> で引数を確認できます。</p>
+</body>
+</html>

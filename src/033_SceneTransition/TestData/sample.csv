@@ -1,0 +1,5 @@
+image_path,duration_ms,transition,transition_ms
+scene_002.png,1500,cut,0
+scene_003.png,1300,crossfade,300
+scene_004.png,1100,wipe,400
+scene_005.png,1600,fadeblack,500

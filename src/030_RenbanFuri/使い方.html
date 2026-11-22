@@ -1,0 +1,38 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>030 連番振り — 使い方</title><style>body{font-family:"Yu Gothic UI",sans-serif;line-height:1.8;color:#18212b;background:#f4f1e9;margin:0}main{max-width:900px;margin:30px auto;padding:28px;background:#fffdf8;border-radius:16px}h1,h2{color:#176b67}pre{background:#18212b;color:#fff;padding:18px;overflow:auto;border-radius:8px}code{overflow-wrap:anywhere}a{color:#176b67}@media(max-width:600px){main{margin:10px;padding:18px}h1{font-size:1.6em}}</style></head><body><main><a href="../index.html">← ツール一覧</a><h1>030 連番振り（RenbanFuri）</h1>
+<p>指定フォルダ直下の通常ファイルを名前の昇順で並べ、3桁以上の連番を付与します。Python 3.9以上、標準ライブラリのみで動作します。Windows向けCLIです。</p>
+<h2>使い方</h2>
+<p>PowerShellでこのツールのフォルダへ移動して実行します。空白を含むパスは引用符で囲んでください。</p>
+<pre><code>
+python renban_furi.py &quot;E:\動画\シーン&quot; 400 3 --dry-run
+
+python renban_furi.py &quot;E:\動画\シーン&quot; 400 3
+
+python renban_furi.py --help
+
+</code></pre>
+<p>必須引数は順に「ディレクトリ」「開始番号（0以上の整数）」「ステップ（1以上の整数）」です。<code>--dry-run</code> は予定を表示するだけで変更しません。対象が空の場合は0件で正常終了します。</p>
+<table style="border-collapse:collapse;width:100%"><thead><tr><th>変更前</th><th>開始400・ステップ3で変更後</th></tr></thead><tbody><tr><td>20261114.mp4</td><td>400_20261114.mp4</td></tr><tr><td>20261116.mp4</td><td>403_20261116.mp4</td></tr><tr><td>20261117.mp4</td><td>406_20261117.mp4</td></tr></tbody></table>
+<h2>並び順と既存番号</h2>
+<p>- 現在のファイル名全体をPythonの文字列順（大文字・小文字を区別）で昇順に処理します。自然数順やエクスプローラーと同一の順序ではなく、<code>10.mp4</code> は <code>2.mp4</code> より前になります。</p>
+<p>- 既存番号は先頭の半角数字3桁以上と <code>_</code> の組み合わせを1回だけ除去して置き換えます。例: <code>007_scene.mp4</code> → <code>400_scene.mp4</code>。<code>02_scene.png</code> は既存番号とみなさず <code>400_02_scene.png</code> になります。</p>
+<p>- 日付などでも <code>20261114_scene.mp4</code> の先頭部分は番号とみなします。必ずプレビューで確認してください。</p>
+<p>- 最低3桁のゼロ埋めです。0は <code>000_</code>、1000は <code>1000_</code>。元の名前（既存番号部分を除く）、拡張子、内容を維持します。</p>
+<p>- 全拡張子・隠しファイルも対象です。サブフォルダ、シンボリックリンクは対象外です。ツール自身や説明書のあるフォルダを対象にするとそれらも変更されます。</p>
+<h2>安全対策・エラー</h2>
+<p>変更先の重複や対象外の既存ファイル・フォルダとの衝突を事前確認します。同一フォルダ内の <code>.renbanfuri-*</code> 一時フォルダへ退避してから確定するので、対象ファイル同士の名前が入れ替わる場合も処理できます。既存ファイルは上書きしません。</p>
+<p>通常の処理失敗・Ctrl+Cでは元の名前への復旧を試みます。権限不足や使用中のファイルなどで復旧も失敗した場合は、一時フォルダ内の <code>recovery.json</code>（元名・一時名・変更後名の対応表）とファイルを残し、場所をエラー表示します。強制終了・電源断では自動復旧されません。対応表を確認し、対象フォルダと一時フォルダ内のファイルを照合して手動復旧してください。一時フォルダは復旧前に削除しないでください。</p>
+<p>対象フォルダを別のプログラムや本ツールの別プロセスで同時に変更しないでください。重要な素材はバックアップを取り、まず <code>--dry-run</code> で順番を確認してください。Windows以外での同時書き込みに対する保証はありません。</p>
+<p>終了コード: 正常・確認のみは0、処理エラーは1、引数エラーは2。復旧処理外のCtrl+Cは130です。</p>
+<h2>ファイル構成とテスト</h2>
+<p>- <code>renban_furi.py</code>: 本体</p>
+<p>- <code>使い方.html</code>: ブラウザ用ヘルプ</p>
+<p>- <code>TestData/</code>: 提供されたテスト素材（そのまま保持）</p>
+<p>- <code>test_renban_furi.py</code>: 自動テスト</p>
+<p>- <code>work/</code>: 作業用フォルダ</p>
+<pre><code>
+python -m unittest discover -s . -p &quot;test_renban_furi.py&quot; -v
+
+python renban_furi.py TestData 400 3 --dry-run
+
+</code></pre>
+<p>自動テストは一時フォルダで実行し、提供素材を変更しません。</p></main></body></html>

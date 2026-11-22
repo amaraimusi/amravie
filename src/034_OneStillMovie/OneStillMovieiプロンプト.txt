@@ -1,0 +1,71 @@
+
+以下のツールを開発してください。
+
+-----------------プロンプト
+
+	
+ツール名：OneStillMovie
+和名：1枚静止画ムービー生成ツール
+ツール番号:034
+
+------- 要件
+
+Pythonツール「1枚静止画ムービー生成ツール（OneStillMovie）」の作成依頼
+
+
+和名：1枚静止画ムービー生成ツール
+
+英名：OneStillMovie
+
+開発環境
+Python 3.9
+コマンドラインツール
+
+
+-----------
+
+mp3と1枚のイラストからmp4動画を作成するツールを作成してください。
+
+mp3から1枚のイラストでmp4動画にする感じだ。
+
+引数
+	mp3ファイルパス
+	画像ファイルパス
+	出力先：省略可能。省略時はmp3ファイルパスと同じディレクトリでmp3ファイル名を元にmp4ファイル名を作成
+
+
+
+
+
+
+------- 開発言語
+python3.9
+
+------- ツールの作成場所
+
+C:/Users/user/git/amravie/src/034_OneStillMovie
+
+------- 作業用ディレクトリのパス
+C:/Users/user/git/amravie/src/034_OneStillMovie/work
+
+
+------- ヘルプ（使い方）ファイルについて
+「使い方」をhtmlで作成し、ツールと同じフォルダに配置してください。
+
+------- 使い方の目次への追加
+目次へ、使い方(html)へのリンクを追加してください。先頭の項に挿入してほしいです。
+C:/Users/user/git/amravie/src/index.html
+
+
+------- テスト用データ
+
+C:\Users\user\git\amravie\src\034_OneStillMovie\TestData\02_街の住人.png
+C:\Users\user\git\amravie\src\034_OneStillMovie\TestData\ガガンボマンv4.mp3
+
+
+
+
+
+
+
+

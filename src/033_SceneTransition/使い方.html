@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>033 SceneTransition（シーントランジション）の使い方</title>
+<style>
+body { max-width: 54rem; margin: 2rem auto; padding: 0 1rem; font-family: "Yu Gothic UI", sans-serif; line-height: 1.7; color: #18212b; }
+h1, h2 { color: #176b67; }
+pre { padding: 1rem; background: #f4f1e9; overflow-x: auto; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid #d9d4c8; padding: .4rem .8rem; text-align: left; }
+</style>
+</head>
+<body>
+<p><a href="../index.html">Pythonツール一覧</a></p>
+<h1>033 SceneTransition（シーントランジション）</h1>
+<p>指示CSVの行順にシーンイラストを連結し、切り替え効果付きのMP4を作成します。</p>
+<h2>インストール</h2>
+<p>WindowsでPython 3.9とFFmpeg（libx264とAACを含むビルド）を使います。H.265を使う場合はlibx265も必要です。FFmpegをPATHに追加するか、<code>--ffmpeg</code> に実行ファイルのパスを指定してください。</p>
+<pre><code>cd C:\Users\user\git\amravie\src\033_SceneTransition &amp;&amp; python -m pip install Pillow</code></pre>
+<h2>コマンドプロンプトでの実行例</h2>
+<p>付属の4枚の画像で試す例。</p>
+<pre><code>cd C:\Users\user\git\amravie\src\033_SceneTransition &amp;&amp; python scene_transition.py TestData\sample.csv -o ..\work\sample.mp4</code></pre>
+<p>制作素材を使って音声付き動画を生成する例。</p>
+<pre><code>cd C:\Users\user\git\amravie\src\033_SceneTransition &amp;&amp; python scene_transition.py "E:\backup_kenji\mov\amaraimusi_no_utabako\a058\ツール開発作業\Devlerin Yeşil Zaferi.csv" -o "..\Devlerin Yeşil Zaferi - SceneTransition.mp4" --audio "..\Devlerin Yeşil Zaferi.mp3" --overwrite</code></pre>
+<table>
+<thead><tr><th>引数</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><code>CSV [MP4] [MP3]</code></td><td>CSVは必須。MP4とMP3は省略可。</td></tr>
+<tr><td><code>-o</code> / <code>--output</code></td><td>MP4保存先。省略時はCSVと同じ場所・ベース名。</td></tr>
+<tr><td><code>-a</code> / <code>--audio</code></td><td>MP3音源。省略すると無音。</td></tr>
+<tr><td><code>--aspect-ratio</code></td><td>既定は16:9（1920×1080）。縦長は <code>--aspect-ratio 9:16</code> など。</td></tr>
+<tr><td><code>--fps</code></td><td>正の整数。既定は30。</td></tr>
+<tr><td><code>--codec</code></td><td><code>h264</code>（既定）または <code>h265</code>。</td></tr>
+<tr><td><code>--overwrite</code></td><td>同名のMP4を上書き。</td></tr>
+<tr><td><code>--ffmpeg</code></td><td>FFmpegの実行ファイル名またはパス。</td></tr>
+<tr><td><code>--help</code></td><td>引数一覧を表示。</td></tr>
+</tbody>
+</table>
+<h2>指示CSV</h2>
+<p>UTF-8（BOMあり・なし）で保存します。CSV自体の相対パスはコマンドの実行場所、画像・MP3・MP4の相対パスはCSVのあるフォルダが基準です。</p>
+<pre><code>image_path,duration_ms,transition,transition_ms
+scene_002.png,1500,cut,0
+scene_003.png,1300,crossfade,300
+scene_004.png,1100,wipe,400
+scene_005.png,1600,fadeblack,500</code></pre>
+<p><code>duration_ms</code> は切り替え後の表示時間、<code>transition_ms</code> はその画像に切り替える時間です。最初の行は <code>cut,0</code> を指定します。効果を空欄にすると、切り替え時間が正ならクロスディゾルブ、0ならカットです。</p>
+<p>効果は <code>cut</code>（カット）、<code>crossfade</code>（クロスディゾルブ）、<code>fadeblack</code>（黒経由）、<code>wipe</code>（ワイプ）、<code>slide</code>（スライド）、<code>zoom</code>（ズーム）、<code>blur</code>（ブラー）です。</p>
+<p>映像尺は表示時間と切り替え時間の合計をフレーム単位に丸めた長さです。音声は映像生成後にAACで組み込みます。映像と音声それぞれのトラックの長さを維持します。</p>
+<p><a href="README.md">README</a> ・ <a href="TestData/sample.csv">サンプルCSV</a></p>
+</body>
+</html>

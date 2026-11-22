@@ -1,0 +1,8 @@
+# Python 3.9. Use a virtual environment.
+stable-ts==2.19.1
+openai-whisper==20240930
+torch==2.5.1
+torchaudio==2.5.1
+numpy>=1.23.5,<2
+numba==0.60.0
+scipy==1.13.1

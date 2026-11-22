@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>032 歌詞動機 KashiDoki — 使い方</title>
+<style>body{max-width:960px;margin:40px auto;padding:0 24px;font-family:system-ui,sans-serif;line-height:1.9;color:#20333d;background:#f8faf9}h1,h2{color:#176b67}pre{padding:20px;background:#e9f0ef;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%}td,th{padding:10px;border:1px solid #ccd8d4;text-align:left}a{color:#176b67}</style></head><body>
+<a href="../index.html">ツール一覧</a><h1>032 歌詞動機 / KashiDoki</h1>
+<p>MP3と歌詞テキストから、歌声の位置に合わせたSRT字幕を作成するPython 3.9用コマンドラインツールです。Whisperの音声・テキスト間の対応をstable-tsのDTWで解析する強制アライメントを使用します。曲の長さによる均等配置はしません。</p>
+<h2>1. 準備</h2><p>Python 3.9（64bit）とFFmpegが必要です。FFmpegをPATHに登録するか、実行時に <code>--ffmpeg "C:\ffmpeg\bin\ffmpeg.exe"</code> を指定してください。PowerShellでツールのフォルダを開き、次を実行します。既存環境と分離するため、専用の仮想環境を作ります。</p>
+<pre>cd C:\Users\user\git\amravie\src\032_KashiDoki
+python -m venv work\venv
+.\work\venv\Scripts\python.exe -m pip install -r requirements.txt</pre>
+<p>初回は依存ライブラリとモデルのダウンロードにインターネット接続が必要です。smallモデルは約460MBで、ライブラリを含め数GBの空き容量を確保してください。モデルは <code>work/models</code> に保存され、再利用されます。通常の解析はローカルで行い、音源を外部APIに送信しません。CPUでも動作しますが、曲の長さ・モデル・PC性能によって時間がかかります。</p>
+<h2>2. 実行</h2><pre>.\work\venv\Scripts\python.exe kashi_doki.py "TestData\猫マフラー.mp3" "TestData\猫マフラーの歌詞.txt"</pre>
+<p>絶対パスも使用できます。空白や日本語を含むパスは引用符で囲んでください。</p>
+<h2>3. 歌詞の書き方</h2><p>歌われる順に、字幕1件を1行で記載します。空行と <code>[Intro]</code>、<code>[Chorus]</code> などの角括弧内の注記は無視します。行内・複数行の注記にも対応します。括弧の閉じ忘れはエラーにします。既定の文字コードはUTF-8（BOMあり・なし）です。Shift JISの場合は <code>--encoding cp932</code> を追加してください。繰り返しの歌詞も省略せず、実際の歌唱順に書いてください。</p>
+<h2>4. 出力</h2><pre>TestData\kasiDoki\猫マフラー.srt
+TestData\kasiDoki\data\猫マフラー_実行日時\
+  lyrics_clean.txt    注記除去後の歌詞
+  audio_16k.wav       解析用音源
+  alignment.json     単語単位の解析結果（解析が完了した場合）
+  report.json        実行条件・結果・エラー</pre>
+<p>出力先はMP3と同じディレクトリの <strong>kasiDoki</strong> です。既存のSRTがある場合は日時付きの別名に保存します。元のMP3と歌詞は変更しません。SRTはUTF-8 BOM付きで保存します。不要になった解析用WAVや実行別データは削除できます。</p>
+<h2>5. オプション</h2><table><tr><th>指定</th><th>説明</th></tr>
+<tr><td>--model small</td><td>既定small。tiny / base / small / medium / large-v3。大きいモデルは時間・メモリが必要です。</td></tr>
+<tr><td>--language ja</td><td>主な歌詞の言語。フランス語ならfr、英語ならen。混在曲は主要言語を指定します。</td></tr>
+<tr><td>--device cpu</td><td>既定cpu。対応するPyTorch・NVIDIA GPUがある場合はcuda。</td></tr>
+<tr><td>--threads 4</td><td>CPUの処理スレッド数。</td></tr>
+<tr><td>--vocals "vocals.wav"</td><td>任意の歌声分離済み音源を解析に使用。元MP3と同じ開始位置・長さで、前奏や無音を切り落としていない音源を用意してください。出力先は引き続き元MP3基準です。</td></tr>
+<tr><td>--help</td><td>すべての引数を表示。</td></tr></table>
+<h2>6. 精度とエラー</h2><p>伴奏を単純なしきい値で歌声と見なす方式ではなく、指定歌詞と音声特徴の対応から位置を推定します。ただし歌唱、長い母音、合唱、効果音、同じ歌詞の繰り返し、日本語とフランス語の混在では誤差が出ることがあります。完成SRTは必ず音源と照合してください。改善するには大きいモデルや、Demucs等で事前に分離した歌声を <code>--vocals</code> で使用します。本ツール自体は歌声分離を自動実行しません。</p>
+<p>行の欠落、時刻の逆転・重複、行内すべての解析単位の長さがゼロの場合はSRTを作成せず、エラーと解析データを保存します。小さい仮名や記号など、一部の解析単位が長さゼロになる場合は行全体の検出時刻を使用します。長さゼロの解析単位が半数以上、または平均のモデル確率が0.25未満の行は <code>report.json</code> の <code>review</code> に記録します（確率は字幕精度の保証ではありません）。時刻が形式的に正常でも位置の正しさを保証するものではありません。歌詞と実音源が一致するか確認し、モデルや主要言語を変更して再実行してください。終了コードは成功0、エラー1、中断130です。</p>
+<h2>参考</h2><p><a href="https://github.com/jianfch/stable-ts">stable-ts（公式）</a> / <a href="https://github.com/openai/whisper">Whisper（公式）</a> / <a href="https://ffmpeg.org/">FFmpeg</a></p>
+</body></html>

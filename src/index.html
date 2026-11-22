@@ -14,7 +14,34 @@ h2{margin:0;font-size:1.35rem} .ja{margin:0;color:var(--accent);font-weight:700}
 .hidden{display:none} footer{text-align:center;color:var(--muted);padding:0 20px 35px;font-size:.85rem} @media(max-width:520px){.grid{grid-template-columns:1fr}.card-head{display:block}.kind{display:inline-block;margin-top:8px}}
 </style></head><body>
 <header><div class="eyebrow">AMRAVIE / TOOL CATALOG</div><h1>Pythonツール一覧</h1><p>src 配下にある実行可能な Python ツールの目的、使い方、注意点をまとめた一覧です。データの正本は python_tools.sqlite です。</p></header>
-<main><div class="toolbar"><input id="search" type="search" placeholder="名前、目的、ファイル名などで検索…" autofocus><span id="count">19 件</span></div><section class="grid">
+<main><div class="toolbar"><input id="search" type="search" placeholder="名前、目的、ファイル名などで検索…" autofocus><span id="count">24 件</span></div><section class="grid">
+<article class="card" data-search="034 onestillmovie 1枚静止画ムービー生成ツール mp3 画像 イラスト 動画 mp4"><div class="card-head"><div><h2>OneStillMovie</h2><p class="ja">034 1枚静止画ムービー生成ツール</p></div><span class="kind">コマンドライン</span></div><p class="purpose">MP3と1枚のイラストから、曲の長さに合わせたMP4を生成。</p><p><a href="034_OneStillMovie/使い方.html">使い方（HTML）</a></p><dl><dt>必要なもの</dt><dd>Python 3.9、FFmpeg</dd></dl></article>
+<article class="card" data-search="033 SceneTransition シーントランジション CSV 画像 動画 MP4 MP3"><div class="card-head"><div><h2>SceneTransition</h2><p class="ja">033 シーントランジション</p></div><span class="kind">コマンドライン</span></div><p class="purpose">指示CSVの行順に画像を連結し、7種類の切り替え効果と任意のMP3音声を付けてMP4を生成。</p><p><a href="033_SceneTransition/使い方.html">使い方（HTML）</a></p><dl><dt>必要なもの</dt><dd>Python 3.9、Pillow、FFmpeg</dd></dl></article>
+
+        <article class="card" data-search="032 kashidoki 歌詞動機 mp3 歌詞 srt 強制アライメント 字幕">
+          <div class="card-head"><div><h2>KashiDoki</h2><p class="ja">032 歌詞動機</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">MP3と歌詞から歌声の位置に合わせたSRT字幕を作成。強制アライメントに対応。</p>
+          <p><a href="032_KashiDoki/使い方.html">使い方（HTML）</a></p>
+          <dl><dt>使用例</dt><dd><code>python 032_KashiDoki/kashi_doki.py "曲.mp3" "歌詞.txt"</code></dd>
+          <dt>その他説明</dt><dd>[]内の注記を除外。MP3と同じフォルダのkasiDokiへSRTと解析データを保存。</dd>
+          <dt>必要なもの</dt><dd>Python 3.9、FFmpeg、stable-ts、PyTorch</dd><dt>最終更新日</dt><dd>2026-11-20</dd></dl>
+        </article>
+        <article class="card" data-search="031 thereturnkings the return of the king 王の帰還 ゲーム rpg ファンタジー セーブ">
+          <div class="card-head"><div><h2>TheReturnKings</h2><p class="ja">031 王の帰還</p></div><span class="kind">2D RPG</span></div>
+          <p class="purpose">四つの種族の仲間と三つの誓印を集め、王城を取り戻すドット絵ファンタジーRPG。</p>
+          <p><a href="031_TheReturnKings/使い方.html">使い方（HTML）</a></p>
+          <dl><dt>使用例</dt><dd><code>python 031_TheReturnKings/main.py</code> または「起動.bat」</dd>
+          <dt>その他説明</dt><dd>5地域、4人の仲間、ターン制戦闘、装備強化、地図、3枠セーブと自動保存、エンディングを収録。</dd>
+          <dt>必要なもの</dt><dd>Python 3.9、pygame</dd><dt>最終更新日</dt><dd>2026-11-18</dd></dl>
+        </article>
+        <article class="card" data-search="030 renbanfuri 連番振り ファイル名 連番 シーン 並び順">
+          <div class="card-head"><div><h2>RenbanFuri</h2><p class="ja">030 連番振り</p></div><span class="kind">コマンドライン</span></div>
+          <p class="purpose">ファイル名順に3桁以上の連番を付与。開始番号とステップを指定し、既存番号も置換。</p>
+          <p><a href="030_RenbanFuri/使い方.html">使い方（HTML）</a></p>
+          <dl><dt>使用例</dt><dd><code>python 030_RenbanFuri/renban_furi.py "E:/動画/シーン" 400 3 --dry-run</code></dd>
+          <dt>その他説明</dt><dd>直下の通常ファイルのみ。衝突事前確認、一時退避、失敗時の復旧に対応。</dd>
+          <dt>必要なもの</dt><dd>Python 3.9以上（標準ライブラリのみ）</dd><dt>最終更新日</dt><dd>2026-11-16</dd></dl>
+        </article>
         <article class="card" data-search="shukushokobo shukusho-kobo 縮小工房 画像 一括縮小 サムネイル png jpeg webp">
           <div class="card-head"><div><h2>ShukushoKobo</h2><p class="ja">縮小工房 — 画像一括縮小ツール</p></div><span class="kind">コマンドライン</span></div>
           <p class="purpose">フォルダ内の画像を縦横比・透過を保って一括縮小。Web用サムネイルを生成。</p>
@@ -213,5 +240,5 @@ h2{margin:0;font-size:1.35rem} .ja{margin:0;color:var(--accent);font-weight:700}
           </dl>
         </article></section></main>
 <footer>SQLiteから生成 / 最終更新日は各実行ファイルのファイル更新日時</footer>
-<script>const q=document.querySelector('#search'),cards=[...document.querySelectorAll('.card')],count=document.querySelector('#count');q.addEventListener('input',()=>{const s=q.value.trim().toLocaleLowerCase();let n=0;cards.forEach(c=>{const show=c.dataset.search.includes(s);c.classList.toggle('hidden',!show);if(show)n++});count.textContent=n+' 件'});</script>
+<script>const q=document.querySelector('#search'),cards=[...document.querySelectorAll('.card')],count=document.querySelector('#count');count.textContent=cards.length+' 件';q.addEventListener('input',()=>{const s=q.value.trim().toLocaleLowerCase();let n=0;cards.forEach(c=>{const show=c.dataset.search.includes(s);c.classList.toggle('hidden',!show);if(show)n++});count.textContent=n+' 件'});</script>
 </body></html>
